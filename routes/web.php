@@ -3,24 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
-// Default:
+// Login page
+Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 
-Route::get('/', function () {
-      return view('welcome');
+// Login form submission
+Route::post('/login', [AuthController::class, 'login']);
 
+// Logout
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
-      // Login page
-      Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
-
-      // Login form submission
-      Route::post('/login', [AuthController::class, 'login']);
-
-      // Logout
-      Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
-      // Home page (protected manually)
-      Route::get('/home', function () {
-            return view('home'); // we will create this later
-      });
+// Home page (protected manually)
+Route::get('/home', function () {
+      return view('home');
 });
