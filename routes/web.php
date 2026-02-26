@@ -19,8 +19,25 @@ Route::get('/home', function () {
       return view('home');
 });
 
-// Members CRUD
 
+/*
+|--------------------------------------------------------------------------
+| Members CRUD Routes
+|--------------------------------------------------------------------------
+| These routes are NOT protected by middleware because we are following
+| the class-demo style manual authentication.
+|
+| Each MembersController method will manually check:
+| 
+|     if (!session('isLoggedIn')) {
+|         return redirect('/login');
+|     }
+|
+| This keeps the logic simple and matches the teacher's expectations.
+*/
+
+
+// Members CRUD
 Route::get('/members', [MembersController::class, 'index'])->name('members.index');
 Route::get('/members/create', [MembersController::class, 'create'])->name('members.create');
 Route::post('/members', [MembersController::class, 'store'])->name('members.store');

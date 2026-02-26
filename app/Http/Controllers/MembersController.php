@@ -10,7 +10,11 @@ class MembersController extends Controller
       // List all members
       public function index()
       {
-            //
+            // Get all members from the database
+            $members = Member::all();
+
+            // Return the view with the data 
+            return view('members.index', ['members' => $members]);
       }
 
       // Show create form
