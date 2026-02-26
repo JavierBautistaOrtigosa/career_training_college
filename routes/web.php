@@ -16,6 +16,12 @@ Route::post('/login', [AuthController::class, 'login']);
 // Logout
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// About
+Route::get('/about', function () {
+      return view('about');
+})->name('about');
+
+
 
 /*
 |--------------------------------------------------------------------------
