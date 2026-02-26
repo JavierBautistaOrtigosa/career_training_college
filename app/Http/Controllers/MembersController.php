@@ -66,7 +66,19 @@ class MembersController extends Controller
       // Show edit form
       public function edit($id)
       {
-            //
+            // Manual login protection 
+
+            if (!session('isLoggedIn')) {
+                  return redirect('/login');
+            }
+
+            // Find the member 
+
+            $member = Member::findOrFail($id);
+
+            // Return the edit view 
+
+            return view('members.edit', compact('member'));
       }
 
       // Handle update form submission
