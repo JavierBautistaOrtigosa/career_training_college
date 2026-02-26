@@ -10,10 +10,15 @@ class EventsController extends Controller
       // List all events
       public function index()
       {
-            // Get all events from the database
-            $events = Event::all();
+            // Manual login protection 
 
-            // Return the view with the data
+            if (!session('isLoggedIn')) {
+                  return redirect('/login');
+            }
+
+            // Get all events from the database
+
+            $events = Event::all();
             return view('events.index', ['events' => $events]);
       }
 

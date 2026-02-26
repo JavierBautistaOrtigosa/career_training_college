@@ -10,10 +10,13 @@ class MembersController extends Controller
       // List all members
       public function index()
       {
-            // Get all members from the database
-            $members = Member::all();
+            // Manual login protection 
 
-            // Return the view with the data 
+            if (!session('isLoggedIn')) {
+                  return redirect('/login');
+            }
+
+            $members = Member::all();
             return view('members.index', ['members' => $members]);
       }
 
