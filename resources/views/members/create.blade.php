@@ -27,6 +27,17 @@
                   <input type="text" name="phone" class="form-control" required>
             </div>
 
+            <div class="mb-3">
+                  <label class="form-label">Age</label>
+                  <input type="number" name="age" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                  <label class="form-label">Address</label>
+                  <input type="text" name="address" class="form-control" required>
+            </div>
+
+
             <button type="submit" class="btn btn-primary">Save Member</button>
             <a href="{{ route('members.index') }}" class="btn btn-secondary">Cancel</a>
       </form>

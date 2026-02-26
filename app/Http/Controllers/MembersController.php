@@ -30,7 +30,37 @@ class MembersController extends Controller
       // Handle create form submission
       public function store(Request $request)
       {
-            //
+            // Manual login protection 
+
+            if (!session('isLoggedIn')) {
+                  return redirect('/login');
+            }
+
+            // Validate form input 
+
+            $request->validate([
+                  'first_name' => 'required',
+                  'last_name' => 'required',
+                  'age' => 'required|integer',
+                  'email' => 'required|email',
+                  'phone' => 'required',
+                  'address' => 'required'
+            ]);
+
+            // Create new member 
+
+            Member::create([
+                  'first_name' => $request->first_name,
+                  'last_name' => $request->last_name,
+                  'age' => $request->age,
+                  'email' => $request->email,
+                  'phone' => $request->phone,
+                  'address' => $request->address
+            ]);
+
+            // Redirect back to members list 
+
+            return redirect()->route('members.index');
       }
 
       // Show edit form
