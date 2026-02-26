@@ -20,7 +20,11 @@ class MembersController extends Controller
       // Show create form
       public function create()
       {
-            //
+            // Manual login protection (class-demo style) 
+            if (!session('isLoggedIn')) {
+                  return redirect('/login');
+            }
+            return view('members.create');
       }
 
       // Handle create form submission
