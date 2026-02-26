@@ -1,3 +1,0 @@
-<h1>Welcome!</h1>
-<p>You are logged in.</p>
-<a href="/logout">Logout</a>

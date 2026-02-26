@@ -16,11 +16,6 @@ Route::post('/login', [AuthController::class, 'login']);
 // Logout
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Home page (protected manually)
-Route::get('/home', function () {
-      return view('home');
-});
-
 
 /*
 |--------------------------------------------------------------------------

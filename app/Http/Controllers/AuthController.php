@@ -35,7 +35,7 @@ class AuthController extends Controller
             $request->session()->put('isLoggedIn', true);
             $request->session()->put('user_id', $user->id);
 
-            return redirect('/home');
+            return redirect('/members');
       }
 
       // Logout
