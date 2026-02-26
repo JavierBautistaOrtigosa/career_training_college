@@ -27,11 +27,15 @@
                         <td>
                               <a href="{{ route('members.edit', $member->id) }}" class="btn btn-sm btn-warning">Edit</a>
 
-                              <form action="{{ route('members.destroy', $member->id) }}" method="POST" style="display:inline;">
+                              <form action="{{ route('members.destroy', $member->id) }}" method="POST" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this member?')">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                          onclick="return confirm('Are you sure you want to delete this member?');">
+                                          Delete
+                                    </button>
                               </form>
+
                         </td>
                   </tr>
                   @endforeach

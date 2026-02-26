@@ -123,6 +123,15 @@ class MembersController extends Controller
       // Delete a member
       public function destroy($id)
       {
-            //
+            // Manual login protection 
+            if (!session('isLoggedIn')) {
+                  return redirect('/login');
+            }
+            // Find the member 
+            $member = Member::findOrFail($id);
+            // Delete the member 
+            $member->delete();
+            // Redirect back to members list 
+            return redirect()->route('members.index');
       }
 }
