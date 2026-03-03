@@ -1,8 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-4">
-      <h1>About</h1>
-      <p>This system was developed as part of the Career Training College project. It demonstrates Members and Events management with authentication.</p>
+
+<h1 class="mb-4 fw-bold">About Career Training College</h1>
+
+<div class="card shadow-sm rounded-3 mb-4">
+      <div class="card-body p-4">
+
+            <p class="mb-3">
+                  Career Training College is committed to delivering high‑quality education and practical
+                  training that prepares students for real‑world success. Our programs are designed to support
+                  learners at every stage of their journey, from foundational skills to advanced professional
+                  development.
+            </p>
+
+            <p class="mb-3">
+                  This management system provides administrators with a clean, modern interface for managing
+                  members, events, and essential college information. Built with Laravel and Bootstrap, the
+                  system focuses on simplicity, clarity, and efficiency.
+            </p>
+
+            <p class="mb-0 text-muted">
+                  Thank you for being part of the Career Training College community.
+            </p>
+
+      </div>
 </div>
+
 @endsection
