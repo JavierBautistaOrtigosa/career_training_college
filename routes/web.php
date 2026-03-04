@@ -5,7 +5,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\MembersController;
 
+// Redirect root URL to the login page
+Route::get('/', function () {
+      return redirect()->route('login');
+});
 
+Route::get('/', function () {
+      return redirect()->route('login');
+});
 
 // Login page
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
