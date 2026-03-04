@@ -55,6 +55,10 @@ Route::get('/members/{id}/edit', [MembersController::class, 'edit'])->name('memb
 Route::put('/members/{id}', [MembersController::class, 'update'])->name('members.update');
 Route::delete('/members/{id}', [MembersController::class, 'destroy'])->name('members.destroy');
 
+// Members - Card View
+Route::get('/members/cards', [MembersController::class, 'cards'])->name('members.cards');
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -80,3 +84,6 @@ Route::post('/events', [EventsController::class, 'store'])->name('events.store')
 Route::get('/events/{id}/edit', [EventsController::class, 'edit'])->name('events.edit');
 Route::put('/events/{id}', [EventsController::class, 'update'])->name('events.update');
 Route::delete('/events/{id}', [EventsController::class, 'destroy'])->name('events.destroy');
+
+// Events - Card View
+Route::get('/events/cards', [EventsController::class, 'cards'])->name('events.cards');

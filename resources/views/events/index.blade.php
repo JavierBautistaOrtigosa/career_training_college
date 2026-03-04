@@ -12,6 +12,9 @@
                   <a href="{{ route('events.create') }}" class="btn btn-outline-success">
                         + Add New Event
                   </a>
+                  <a href="{{ route('events.cards') }}" class="btn btn-outline-secondary me-2">
+                        Card View
+                  </a>
             </div>
 
             <div class="table-responsive border rounded-3 overflow-hidden">
@@ -32,7 +35,7 @@
                               <tr>
                                     <td class="px-3">{{ $event->id }}</td>
                                     <td class="px-3">{{ $event->title }}</td>
-                                    <td class="px-3">{{ $event->date_time }}</td>
+                                    <td class="px-3">{{ \Carbon\Carbon::parse($event->date_time)->format('M j, Y – g:i A') }}</td>
                                     <td class="px-3">{{ $event->location }}</td>
                                     <td class="px-3">{{ $event->category }}</td>
 

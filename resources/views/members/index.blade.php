@@ -12,6 +12,10 @@
                   <a href="{{ route('members.create') }}" class="btn btn-outline-success">
                         + Add New Member
                   </a>
+                  <a href="{{ route('members.cards') }}" class="btn btn-outline-secondary me-2">
+                        Card View
+                  </a>
+
 
             </div>
 

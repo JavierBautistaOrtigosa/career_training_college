@@ -128,4 +128,11 @@ class EventsController extends Controller
             // Redirect back to events list
             return redirect()->route('events.index');
       }
+
+      // Cards View
+      public function cards()
+      {
+            $events = Event::all();
+            return view('events.cards', compact('events'));
+      }
 }

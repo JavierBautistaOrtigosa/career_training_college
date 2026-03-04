@@ -137,4 +137,11 @@ class MembersController extends Controller
             // Redirect back to members list 
             return redirect()->route('members.index');
       }
+
+      //  Cards View
+      public function cards()
+      {
+            $members = Member::all();
+            return view('members.cards', compact('members'));
+      }
 }
