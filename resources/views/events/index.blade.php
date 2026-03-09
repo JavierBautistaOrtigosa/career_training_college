@@ -9,12 +9,16 @@
 
             <div class="d-flex justify-content-between align-items-center mb-3">
                   <h5 class="mb-0 fw-semibold">Event Records</h5>
-                  <a href="{{ route('events.create') }}" class="btn btn-outline-success">
-                        + Add New Event
-                  </a>
-                  <a href="{{ route('events.cards') }}" class="btn btn-outline-secondary me-2">
-                        Card View
-                  </a>
+
+                  <div class="d-flex align-items-center">
+                        <a href="{{ route('events.cards') }}" class="btn btn-outline-secondary me-2">
+                              Card View
+                        </a>
+                        <a href="{{ route('events.create') }}" class="btn btn-outline-success">
+                              + Add New Event
+                        </a>
+                  </div>
+
             </div>
 
             <div class="table-responsive border rounded-3 overflow-hidden">

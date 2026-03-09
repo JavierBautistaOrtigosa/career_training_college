@@ -9,14 +9,15 @@
 
             <div class="d-flex justify-content-between align-items-center mb-3">
                   <h5 class="mb-0 fw-semibold">Member Records</h5>
-                  <a href="{{ route('members.create') }}" class="btn btn-outline-success">
-                        + Add New Member
-                  </a>
-                  <a href="{{ route('members.cards') }}" class="btn btn-outline-secondary me-2">
-                        Card View
-                  </a>
 
-
+                  <div class="d-flex align-items-center">
+                        <a href="{{ route('members.cards') }}" class="btn btn-outline-secondary me-2">
+                              Card View
+                        </a>
+                        <a href="{{ route('members.create') }}" class="btn btn-outline-success">
+                              + Add New Member
+                        </a>
+                  </div>
             </div>
 
             <div class="table-responsive border rounded-3 overflow-hidden">
