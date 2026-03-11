@@ -17,4 +17,11 @@ class Member extends Model
             'phone',
             'address',
       ];
+
+      public function getFullNameAttribute()
+      {
+            // This functions allows the members table to show the following:
+            // {{ $member->full_name }}
+            return $this->first_name . ' ' . $this->last_name;
+      }
 }

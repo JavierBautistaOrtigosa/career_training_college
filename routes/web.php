@@ -42,8 +42,6 @@ Route::get('/about', function () {
 |     if (!session('isLoggedIn')) {
 |         return redirect('/login');
 |     }
-|
-| This keeps the logic simple and matches the teacher's expectations.
 */
 
 
@@ -72,8 +70,6 @@ Route::get('/members/cards', [MembersController::class, 'cards'])->name('members
 |     if (!session('isLoggedIn')) {
 |         return redirect('/login');
 |     }
-|
-| This keeps the logic simple and consistent with the rest of the project.
 */
 
 
