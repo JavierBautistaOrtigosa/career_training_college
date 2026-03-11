@@ -4,9 +4,24 @@
 <head>
       <title>Career Training College</title>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Disable caching -->
+      <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+      <meta http-equiv="Pragma" content="no-cache">
+      <meta http-equiv="Expires" content="0">
+
 
 
 </head>
+
+<!-- Disable the browser’s Back/Forward Cache (bfcache) -->
+<script>
+      window.addEventListener("pageshow", function(event) {
+            if (event.persisted) {
+                  window.location.reload();
+            }
+      });
+</script>
+
 
 <body class="bg-light">
 

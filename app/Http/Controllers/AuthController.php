@@ -42,6 +42,6 @@ class AuthController extends Controller
       public function logout(Request $request)
       {
             $request->session()->flush();
-            return redirect('/login');
+            return redirect('/login')->with('error', 'Your session has ended. Please log in again.');
       }
 }
