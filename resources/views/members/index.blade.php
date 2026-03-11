@@ -1,3 +1,8 @@
+{{-- DEBUG --}}
+<div style="background: yellow; padding: 10px; font-weight: bold;">
+      INDEX BLADE LOADED
+</div>
+
 @extends('layouts.app')
 
 @section('content')
@@ -11,12 +16,20 @@
                   <h5 class="mb-0 fw-semibold">Member Records</h5>
 
                   <div class="d-flex align-items-center">
-                        <a href="{{ route('members.cards') }}" class="btn btn-outline-secondary me-2">
+                        <a href="{{ route('members.cards') }}" class="btn btn-outline-secondary btn-sm me-2">
                               Card View
                         </a>
-                        <a href="{{ route('members.create') }}" class="btn btn-outline-success">
-                              + Add New Member
+
+                        {{-- Admin sees real button, user sees invisible placeholder --}}
+                        @if (session('role') === 'admin')
+                        <a href="{{ route('members.create') }}" class="btn btn-outline-primary btn-sm">
+                              Add Member
                         </a>
+                        @else
+                        <button class="btn btn-outline-primary btn-sm" disabled style="opacity:0; pointer-events:none;">
+                              Add Member
+                        </button>
+                        @endif
                   </div>
             </div>
 
@@ -28,38 +41,53 @@
                                     <th class="fw-semibold px-3">Full Name</th>
                                     <th class="fw-semibold px-3">Email</th>
                                     <th class="fw-semibold px-3">Phone</th>
+
+                                    {{-- Always include Actions column --}}
+                                    @if (session('role') === 'admin')
                                     <th class="text-end fw-semibold px-3">Actions</th>
+                                    @else
+                                    <th class="px-3"></th>
+                                    @endif
                               </tr>
                         </thead>
 
                         <tbody>
                               @foreach ($members as $member)
                               <tr>
-
                                     <td class="px-3">{{ $member->id }}</td>
                                     <td class="px-3">{{ $member->full_name }}</td>
                                     <td class="px-3">{{ $member->email }}</td>
                                     <td class="px-3">{{ $member->phone }}</td>
 
-
+                                    {{-- Always include Actions cell --}}
+                                    @if (session('role') === 'admin')
                                     <td class="px-3 text-end">
-                                          <div class="d-inline-flex gap-2">
-                                                <a href="{{ route('members.edit', $member->id) }}" class="btn btn-outline-primary btn-sm">
+                                          <div class="d-inline-flex gap-2 align-items-center">
+
+                                                <a href="{{ route('members.edit', $member->id) }}"
+                                                      class="btn btn-outline-warning btn-sm"
+                                                      style="white-space: nowrap;">
                                                       Edit
                                                 </a>
 
                                                 <form action="{{ route('members.destroy', $member->id) }}"
                                                       method="POST"
-                                                      class="d-inline">
+                                                      style="display:inline-block; margin:0; padding:0;">
                                                       @csrf
                                                       @method('DELETE')
                                                       <button class="btn btn-outline-danger btn-sm"
-                                                            onclick="return confirm('Are you sure you want to delete this member?');">
+                                                            style="white-space: nowrap;">
                                                             Delete
                                                       </button>
                                                 </form>
+
                                           </div>
                                     </td>
+
+
+                                    @else
+                                    <td class="px-3"></td>
+                                    @endif
                               </tr>
                               @endforeach
                         </tbody>
@@ -68,6 +96,7 @@
             </div>
 
       </div>
+
 </div>
 
 @endsection

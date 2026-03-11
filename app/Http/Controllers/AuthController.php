@@ -31,9 +31,12 @@ class AuthController extends Controller
                   return back()->with('error', 'Invalid email or password');
             }
 
-            // CLASS-DEMO STYLE: set login flag
+            // CLASS-DEMO STYLE: set login flags
             $request->session()->put('isLoggedIn', true);
             $request->session()->put('user_id', $user->id);
+
+            // Store the role in the session (admin/user)
+            $request->session()->put('role', $user->role);
 
             return redirect('/members');
       }

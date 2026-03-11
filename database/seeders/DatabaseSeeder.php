@@ -8,18 +8,25 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
+      use WithoutModelEvents;
 
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
-    {
-        // User::factory(10)->create();
+      /**
+       * Seed the application's database.
+       */
+      public function run(): void
+      {
+            // Create a general user
+            User::factory()->create([
+                  'name' => 'Test User',
+                  'email' => 'test@example.com',
+                  'role' => 'user',
+            ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
-    }
+            // Create an admin user
+            User::factory()->create([
+                  'name' => 'Admin User',
+                  'email' => 'admin@example.com',
+                  'role' => 'admin',
+            ]);
+      }
 }

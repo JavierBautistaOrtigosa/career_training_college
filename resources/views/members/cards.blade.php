@@ -10,9 +10,12 @@
                   <a href="{{ route('members.index') }}" class="btn btn-outline-secondary me-2">
                         Table View
                   </a>
+
+                  @if (session('role') === 'admin')
                   <a href="{{ route('members.create') }}" class="btn btn-outline-success">
                         + Add New Member
                   </a>
+                  @endif
             </div>
       </div>
 
@@ -29,6 +32,7 @@
                               <p class="mb-1"><strong>Email:</strong> {{ $member->email }}</p>
                               <p class="mb-1"><strong>Age:</strong> {{ $member->age }}</p>
 
+                              @if (session('role') === 'admin')
                               <div class="mt-3 d-flex gap-2">
                                     <a href="{{ route('members.edit', $member->id) }}"
                                           class="btn btn-outline-primary btn-sm w-50">
@@ -45,6 +49,7 @@
                                           </button>
                                     </form>
                               </div>
+                              @endif
 
                         </div>
                   </div>

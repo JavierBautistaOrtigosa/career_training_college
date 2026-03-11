@@ -10,9 +10,12 @@
                   <a href="{{ route('events.index') }}" class="btn btn-outline-secondary me-2">
                         Table View
                   </a>
+
+                  @if (session('role') === 'admin')
                   <a href="{{ route('events.create') }}" class="btn btn-outline-success">
                         + Add New Event
                   </a>
+                  @endif
             </div>
       </div>
 
@@ -38,6 +41,7 @@
                               <p class="mb-1"><strong>Location:</strong> {{ $event->location }}</p>
                               <p class="mb-1"><strong>Description:</strong> {{ $event->description }}</p>
 
+                              @if (session('role') === 'admin')
                               <div class="mt-3 d-flex gap-2">
                                     <a href="{{ route('events.edit', $event->id) }}"
                                           class="btn btn-outline-primary btn-sm w-50">
@@ -54,6 +58,7 @@
                                           </button>
                                     </form>
                               </div>
+                              @endif
 
                         </div>
                   </div>

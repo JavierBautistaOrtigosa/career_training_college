@@ -30,15 +30,26 @@ class EventsController extends Controller
                   return redirect('/login');
             }
 
+            // Admin-only protection
+            if (session('role') !== 'admin') {
+                  return redirect('/events')->with('error', 'You do not have permission to perform this action.');
+            }
+
             return view('events.create');
       }
+
 
       // Handle create form submission
       public function store(Request $request)
       {
-            // Manual login protection
+            // Manual login protection (class-demo style)
             if (!session('isLoggedIn')) {
                   return redirect('/login');
+            }
+
+            // Admin-only protection
+            if (session('role') !== 'admin') {
+                  return redirect('/events')->with('error', 'You do not have permission to perform this action.');
             }
 
             // Validate form input
@@ -63,12 +74,18 @@ class EventsController extends Controller
             return redirect()->route('events.index');
       }
 
+
       // Show edit form
       public function edit($id)
       {
-            // Manual login protection
+            // Manual login protection (class-demo style)
             if (!session('isLoggedIn')) {
                   return redirect('/login');
+            }
+
+            // Admin-only protection
+            if (session('role') !== 'admin') {
+                  return redirect('/events')->with('error', 'You do not have permission to perform this action.');
             }
 
             // Find the event
@@ -78,12 +95,18 @@ class EventsController extends Controller
             return view('events.edit', compact('event'));
       }
 
+
       // Handle update form submission
       public function update(Request $request, $id)
       {
-            // Manual login protection
+            // Manual login protection (class-demo style)
             if (!session('isLoggedIn')) {
                   return redirect('/login');
+            }
+
+            // Admin-only protection
+            if (session('role') !== 'admin') {
+                  return redirect('/events')->with('error', 'You do not have permission to perform this action.');
             }
 
             // Validate form input
@@ -111,12 +134,18 @@ class EventsController extends Controller
             return redirect()->route('events.index');
       }
 
+
       // Delete an event
       public function destroy($id)
       {
-            // Manual login protection
+            // Manual login protection (class-demo style)
             if (!session('isLoggedIn')) {
                   return redirect('/login');
+            }
+
+            // Admin-only protection
+            if (session('role') !== 'admin') {
+                  return redirect('/events')->with('error', 'You do not have permission to perform this action.');
             }
 
             // Find the event
@@ -128,6 +157,7 @@ class EventsController extends Controller
             // Redirect back to events list
             return redirect()->route('events.index');
       }
+
 
       // Cards View
       public function cards()
