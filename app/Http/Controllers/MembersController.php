@@ -76,7 +76,7 @@ class MembersController extends Controller
             ]);
 
             // Redirect back to members list
-            return redirect()->route('members.index');
+            return redirect()->route('members.index')->with('success', 'Member added successfully.');
       }
 
 
@@ -141,7 +141,7 @@ class MembersController extends Controller
             ]);
 
             // Redirect back to members list
-            return redirect()->route('members.index');
+            return redirect()->route('members.index')->with('success', 'Member updated successfully.');
       }
 
       // Delete a member
@@ -164,7 +164,7 @@ class MembersController extends Controller
             $member->delete();
 
             // Redirect back to members list
-            return redirect()->route('members.index');
+            return redirect()->route('members.index')->with('success', 'Member deleted successfully.');
       }
 
 
