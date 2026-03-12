@@ -12,6 +12,16 @@
                   @method('PUT')
 
                   <div class="mb-3">
+                        <label class="form-label fw-semibold">Member ID</label>
+                        <input
+                              type="text"
+                              class="form-control"
+                              value="{{ $member->id }}"
+                              readonly>
+                  </div>
+
+
+                  <div class="mb-3">
                         <label class="form-label fw-semibold">First Name</label>
                         <input
                               type="text"
