@@ -8,18 +8,20 @@ use App\Models\Event;
 class EventsController extends Controller
 {
       // List all events
-      public function index()
+      public function index(Request $request)
       {
-            // Manual login protection 
-
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
-            // Get all events from the database
+            $query = Event::query();
 
-            $events = Event::all();
-            return view('events.index', ['events' => $events]);
+            // (Filters will be added later)
+            // (Sorting will be added later)
+
+            $events = $query->paginate(10);
+
+            return view('events.index', compact('events'));
       }
 
       // Show create form
@@ -160,9 +162,9 @@ class EventsController extends Controller
 
 
       // Cards View
-      public function cards()
+      public function cards(Request $request)
       {
-            $events = Event::all();
+            $events = Event::paginate(10);
             return view('events.cards', compact('events'));
       }
 }

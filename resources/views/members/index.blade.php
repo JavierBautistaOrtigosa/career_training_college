@@ -68,10 +68,7 @@
 
             {{-- TABLE WRAPPER --}}
             <div class="table-responsive border rounded-3 overflow-hidden">
-                  {{-- PAGINATION (MUST BE OUTSIDE TABLE-RESPONSIVE) --}}
-                  <div class="mt-4">
-                        {{ $members->links() }}
-                  </div>
+
                   <table class="table table-hover align-middle mb-0">
                         <thead class="table-light">
                               <tr>
@@ -132,6 +129,12 @@
             </div>
 
 
+
+
+      </div>
+      {{-- PAGINATION (MUST BE OUTSIDE TABLE-RESPONSIVE) --}}
+      <div class="mt-4">
+            {{ $members->links() }}
 
       </div>
 </div>

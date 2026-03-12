@@ -7,6 +7,7 @@
 <div class="card shadow-sm rounded-3 mb-4">
       <div class="card-body p-4">
 
+            {{-- HEADER ROW --}}
             <div class="d-flex justify-content-between align-items-center mb-3">
                   <h5 class="mb-0 fw-semibold">Event Records</h5>
 
@@ -15,19 +16,17 @@
                               Card View
                         </a>
 
-                        {{-- Admin sees real button, user sees invisible placeholder --}}
                         @if (session('role') === 'admin')
                         <a href="{{ route('events.create') }}" class="btn btn-outline-primary btn-sm">
                               Add Event
                         </a>
                         @else
-                        <button class="btn btn-outline-primary btn-sm d-none">
-                              Add Event
-                        </button>
+                        <button class="btn btn-outline-primary btn-sm d-none">Add Event</button>
                         @endif
                   </div>
             </div>
 
+            {{-- TABLE WRAPPER --}}
             <div class="table-responsive border rounded-3 overflow-hidden">
                   <table class="table table-hover align-middle mb-0">
                         <thead class="table-light">
@@ -38,7 +37,6 @@
                                     <th class="fw-semibold px-3">Location</th>
                                     <th class="fw-semibold px-3">Category</th>
 
-                                    {{-- Always include Actions column --}}
                                     @if (session('role') === 'admin')
                                     <th class="text-end fw-semibold px-3">Actions</th>
                                     @else
@@ -58,7 +56,6 @@
                                     <td class="px-3">{{ $event->location }}</td>
                                     <td class="px-3">{{ $event->category }}</td>
 
-                                    {{-- Always include Actions cell --}}
                                     @if (session('role') === 'admin')
                                     <td class="px-3 text-end">
                                           <div class="d-inline-flex gap-2">
@@ -72,7 +69,8 @@
                                                       method="POST" style="display:inline;">
                                                       @csrf
                                                       @method('DELETE')
-                                                      <button class="btn btn-outline-danger btn-sm">
+                                                      <button class="btn btn-outline-danger btn-sm"
+                                                            onclick="return confirm('Are you sure you want to delete this event?')">
                                                             Delete
                                                       </button>
                                                 </form>
@@ -89,8 +87,12 @@
                   </table>
             </div>
 
+            {{-- PAGINATION (MUST BE OUTSIDE TABLE-RESPONSIVE) --}}
+            <div class="mt-4">
+                  {{ $events->links() }}
+            </div>
+
       </div>
 </div>
-
 
 @endsection
