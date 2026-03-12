@@ -95,10 +95,12 @@
                                                       style="display:inline-block; margin:0; padding:0;">
                                                       @csrf
                                                       @method('DELETE')
-                                                      <button class="btn btn-outline-danger btn-sm"
-                                                            style="white-space: nowrap;">
+                                                      <button
+                                                            class="btn btn-outline-danger btn-sm"
+                                                            onclick="return confirm('Are you sure you want to delete this member?');">
                                                             Delete
                                                       </button>
+
                                                 </form>
 
                                           </div>
