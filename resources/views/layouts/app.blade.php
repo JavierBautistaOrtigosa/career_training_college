@@ -7,10 +7,13 @@
 
       <title>Career Training College</title>
 
-      {{-- Bootstrap CSS (Cloudflare CDN + versioning) --}}
+      {{-- Bootstrap CSS --}}
       <link
             href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css?v=20260311"
             rel="stylesheet">
+
+      {{-- Custom CSS (optional, but not needed for sticky footer) --}}
+      <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
       {{-- Prevent aggressive caching --}}
       <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
@@ -18,7 +21,9 @@
       <meta http-equiv="Expires" content="0">
 </head>
 
-<body class="bg-light">
+{{-- ⭐ PURE BOOTSTRAP STICKY FOOTER --}}
+
+<body class="d-flex flex-column min-vh-100 bg-light">
 
       {{-- NAVBAR --}}
       <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
@@ -65,10 +70,15 @@
             </div>
       </nav>
 
-      {{-- PAGE CONTENT --}}
-      <div class="container mt-4">
-            @yield('content')
-      </div>
+      {{-- ⭐ MAIN CONTENT (fills remaining space) --}}
+      <main class="flex-grow-1">
+            <div class="container mt-4">
+                  @yield('content')
+            </div>
+      </main>
+
+      {{-- FOOTER --}}
+      @include('partials.footer')
 
       {{-- Disable Back/Forward Cache (bfcache) --}}
       <script>
@@ -83,8 +93,6 @@
       <script
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js">
       </script>
-
-      @include('partials.footer')
 
 </body>
 

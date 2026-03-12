@@ -8,17 +8,30 @@ use App\Models\Member;
 class MembersController extends Controller
 {
       // List all members
-      public function index()
+      public function index(Request $request)
       {
-
-            // Manual login protection 
-
+            // Manual login protection
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
-            $members = Member::all();
-            return view('members.index', ['members' => $members]);
+            $query = Member::query();
+
+            // Search filter
+            if ($request->has('search') && $request->search !== '') {
+                  $search = $request->search;
+
+                  $query->where(function ($q) use ($search) {
+                        $q->where('first_name', 'like', "%$search%")
+                              ->orWhere('last_name', 'like', "%$search%")
+                              ->orWhere('email', 'like', "%$search%");
+                  });
+            }
+
+            // Pagination
+            $members = $query->paginate(10);
+
+            return view('members.index', compact('members'));
       }
 
       // Show create form
@@ -171,7 +184,7 @@ class MembersController extends Controller
       //  Cards View
       public function cards()
       {
-            $members = Member::all();
+            $members = Member::paginate(10);
             return view('members.cards', compact('members'));
       }
 }

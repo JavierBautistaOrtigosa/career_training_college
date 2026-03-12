@@ -1,14 +1,29 @@
-{{-- DEBUG --}}
-<div style="background: yellow; padding: 10px; font-weight: bold;">
-      INDEX BLADE LOADED
-</div>
-
 @extends('layouts.app')
 
 @section('content')
 
+<!-- {{-- DEBUG --}}
+<div style="background: yellow; padding: 10px; font-weight: bold;">
+      INDEX BLADE LOADED
+</div> -->
+
+
 <h1 class="mb-4 fw-bold">Members</h1>
 
+{{-- SEARCH BAR --}}
+<form method="GET" action="{{ route('members.index') }}" class="mb-4">
+      <div class="input-group">
+            <input
+                  type="text"
+                  name="search"
+                  class="form-control"
+                  placeholder="Search members by name or email..."
+                  value="{{ request('search') }}">
+            <button class="btn btn-primary">Search</button>
+      </div>
+</form>
+
+{{-- SUCCESS MESSAGE --}}
 @if(session('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
       {{ session('success') }}
@@ -16,6 +31,7 @@
 </div>
 @endif
 
+{{-- ERROR MESSAGES --}}
 @if ($errors->any())
 <div class="alert alert-danger">
       <strong>Please fix the following errors:</strong>
@@ -27,11 +43,11 @@
 </div>
 @endif
 
-
-
+{{-- MAIN CARD --}}
 <div class="card shadow-sm rounded-3 mb-4">
       <div class="card-body p-4">
 
+            {{-- HEADER ROW --}}
             <div class="d-flex justify-content-between align-items-center mb-3">
                   <h5 class="mb-0 fw-semibold">Member Records</h5>
 
@@ -40,20 +56,22 @@
                               Card View
                         </a>
 
-                        {{-- Admin sees real button, user sees invisible placeholder --}}
                         @if (session('role') === 'admin')
                         <a href="{{ route('members.create') }}" class="btn btn-outline-primary btn-sm">
                               Add Member
                         </a>
                         @else
-                        <button class="btn btn-outline-primary btn-sm d-none">
-                              Add Member
-                        </button>
+                        <button class="btn btn-outline-primary btn-sm d-none">Add Member</button>
                         @endif
                   </div>
             </div>
 
+            {{-- TABLE WRAPPER --}}
             <div class="table-responsive border rounded-3 overflow-hidden">
+                  {{-- PAGINATION (MUST BE OUTSIDE TABLE-RESPONSIVE) --}}
+                  <div class="mt-4">
+                        {{ $members->links() }}
+                  </div>
                   <table class="table table-hover align-middle mb-0">
                         <thead class="table-light">
                               <tr>
@@ -62,7 +80,6 @@
                                     <th class="fw-semibold px-3">Email</th>
                                     <th class="fw-semibold px-3">Phone</th>
 
-                                    {{-- Always include Actions column --}}
                                     @if (session('role') === 'admin')
                                     <th class="text-end fw-semibold px-3">Actions</th>
                                     @else
@@ -79,7 +96,6 @@
                                     <td class="px-3">{{ $member->email }}</td>
                                     <td class="px-3">{{ $member->phone }}</td>
 
-                                    {{-- Always include Actions cell --}}
                                     @if (session('role') === 'admin')
                                     <td class="px-3 text-end">
                                           <div class="d-inline-flex gap-2 align-items-center">
@@ -100,13 +116,10 @@
                                                             onclick="return confirm('Are you sure you want to delete this member?');">
                                                             Delete
                                                       </button>
-
                                                 </form>
 
                                           </div>
                                     </td>
-
-
                                     @else
                                     <td class="px-3"></td>
                                     @endif
@@ -115,10 +128,12 @@
                         </tbody>
 
                   </table>
+
             </div>
 
-      </div>
 
+
+      </div>
 </div>
 
 @endsection
