@@ -15,6 +15,10 @@
       {{-- Custom CSS (optional, but not needed for sticky footer) --}}
       <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
+      {{-- Custom CSS (optional... Applies a premium feel) --}}
+      <link rel="stylesheet" href="{{ asset('css/ui.css') }}">
+
+
       {{-- Prevent aggressive caching --}}
       <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
       <meta http-equiv="Pragma" content="no-cache">
@@ -23,7 +27,7 @@
 
 {{-- ⭐ PURE BOOTSTRAP STICKY FOOTER --}}
 
-<body class="d-flex flex-column min-vh-100 bg-light">
+<body class="d-flex flex-column min-vh-100 bg-premium-dark">
 
       {{-- NAVBAR --}}
       <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
@@ -70,9 +74,9 @@
             </div>
       </nav>
 
-      {{-- ⭐ MAIN CONTENT (fills remaining space) --}}
+      {{-- MAIN CONTENT (fills remaining space) --}}
       <main class="flex-grow-1">
-            <div class="container mt-4">
+            <div class="container my-4">
                   @yield('content')
             </div>
       </main>
