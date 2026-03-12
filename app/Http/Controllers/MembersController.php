@@ -55,7 +55,7 @@ class MembersController extends Controller
             $request->validate([
                   'first_name' => 'required',
                   'last_name' => 'required',
-                  'age' => 'required|integer',
+                  'age' => 'required|integer|min:1|max:120',
                   'email' => 'required|email',
                   'phone' => 'required',
                   'address' => 'required',
@@ -117,7 +117,7 @@ class MembersController extends Controller
             $request->validate([
                   'first_name' => 'required',
                   'last_name' => 'required',
-                  'age' => 'required|integer',
+                  'age' => 'required|integer|min:1|max:120',
                   'email' => 'required|email',
                   'phone' => 'required',
                   'address' => 'required',
