@@ -14,19 +14,40 @@
       <div class="container-fluid">
             <div class="row" style="min-height: 100vh;">
 
-                  {{-- LEFT SIDE — WELCOME MESSAGE --}}
-                  <div class="col-md-6 d-flex flex-column justify-content-center align-items-start p-5 bg-white">
+                  {{-- LEFT SIDE — WELCOME MESSAGE WITH FULL BACKGROUND IMAGE --}}
+                  <div class="col-md-6 position-relative p-0">
 
-                        <h1 class="fw-bold mb-3">Welcome to the CTC Management App</h1>
+                        {{-- Background image --}}
+                        <div class="position-absolute top-0 start-0 w-100 h-100"
+                              style="
+            background-image: url('/images/welcome-bg.jpg');
+            background-size: cover;
+            background-position: center;
+         ">
+                        </div>
 
-                        <p class="text-muted fs-5 mb-4" style="max-width: 480px;">
-                              This system helps you manage members, events, and daily operations
-                              quickly and efficiently.
-                        </p>
+                        {{-- Dark overlay for readability --}}
+                        <div class="position-absolute top-0 start-0 w-100 h-100"
+                              style="background: rgba(0, 0, 0, 0.45);">
+                        </div>
 
-                        <p class="text-muted small mt-4">
-                              Career Training College — Internal System
-                        </p>
+                        {{-- Text content --}}
+                        <div class="position-relative p-5 text-white d-flex flex-column justify-content-center"
+                              style="min-height: 100vh;">
+
+                              <h1 class="fw-bold mb-3">Welcome to the CTC Management App</h1>
+
+                              <p class="fs-5 mb-4" style="max-width: 480px;">
+                                    This system helps you manage members, events, and daily operations
+                                    quickly and efficiently.
+                              </p>
+
+                              <p class="small mt-4">
+                                    Career Training College — Internal System
+                              </p>
+
+                        </div>
+
                   </div>
 
                   {{-- RIGHT SIDE — LOGIN FORM --}}
