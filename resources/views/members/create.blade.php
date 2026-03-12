@@ -70,6 +70,15 @@
                               required>
                   </div>
 
+                  <div class="mb-3">
+                        <label class="form-label fw-semibold">Professional Summary</label>
+                        <textarea
+                              name="professional_summary"
+                              class="form-control"
+                              rows="3"
+                              placeholder="Enter a brief summary (optional)"></textarea>
+                  </div>
+
                   <div class="d-flex justify-content-end gap-2 mt-4">
                         <a href="{{ route('members.index') }}" class="btn btn-secondary">
                               Cancel

@@ -58,7 +58,9 @@ class MembersController extends Controller
                   'age' => 'required|integer',
                   'email' => 'required|email',
                   'phone' => 'required',
-                  'address' => 'required'
+                  'address' => 'required',
+                  'professional_summary' => 'nullable'
+
             ]);
 
             // Create new member
@@ -68,7 +70,9 @@ class MembersController extends Controller
                   'age' => $request->age,
                   'email' => $request->email,
                   'phone' => $request->phone,
-                  'address' => $request->address
+                  'address' => $request->address,
+                  'professional_summary' => $request->professional_summary
+
             ]);
 
             // Redirect back to members list
@@ -116,7 +120,9 @@ class MembersController extends Controller
                   'age' => 'required|integer',
                   'email' => 'required|email',
                   'phone' => 'required',
-                  'address' => 'required'
+                  'address' => 'required',
+                  'professional_summary' => 'nullable'
+
             ]);
 
             // Find the member
@@ -129,7 +135,9 @@ class MembersController extends Controller
                   'age' => $request->age,
                   'email' => $request->email,
                   'phone' => $request->phone,
-                  'address' => $request->address
+                  'address' => $request->address,
+                  'professional_summary' => $request->professional_summary
+
             ]);
 
             // Redirect back to members list

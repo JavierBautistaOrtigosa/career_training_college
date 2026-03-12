@@ -16,6 +16,7 @@ class Member extends Model
             'email',
             'phone',
             'address',
+            'professional_summary',
       ];
 
       public function getFullNameAttribute()
