@@ -57,7 +57,7 @@ class MembersController extends Controller
                   'last_name' => 'required',
                   'age' => 'required|integer|min:1|max:120',
                   'email' => 'required|email',
-                  'phone' => 'required',
+                  'phone' => 'required|regex:/^[0-9]{8,15}$/',
                   'address' => 'required',
                   'professional_summary' => 'nullable'
 
@@ -119,7 +119,7 @@ class MembersController extends Controller
                   'last_name' => 'required',
                   'age' => 'required|integer|min:1|max:120',
                   'email' => 'required|email',
-                  'phone' => 'required',
+                  'phone' => 'required|regex:/^[0-9]{8,15}$/',
                   'address' => 'required',
                   'professional_summary' => 'nullable'
 
