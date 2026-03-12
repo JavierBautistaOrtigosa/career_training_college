@@ -10,19 +10,6 @@
 
 <h1 class="mb-4 fw-bold">Members</h1>
 
-{{-- SEARCH BAR --}}
-<form method="GET" action="{{ route('members.index') }}" class="mb-4">
-      <div class="input-group">
-            <input
-                  type="text"
-                  name="search"
-                  class="form-control"
-                  placeholder="Search members by name or email..."
-                  value="{{ request('search') }}">
-            <button class="btn btn-primary">Search</button>
-      </div>
-</form>
-
 {{-- SUCCESS MESSAGE --}}
 @if(session('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -65,6 +52,52 @@
                         @endif
                   </div>
             </div>
+
+            {{-- FILTERS + SORTING --}}
+            <form method="GET" action="{{ route('members.index') }}" class="row g-3 mb-4">
+
+                  {{-- SEARCH: Name --}}
+                  <div class="col-md-4">
+                        <label class="form-label fw-semibold">Search Name</label>
+                        <input type="text" name="search" class="form-control"
+                              placeholder="Search first or last name..."
+                              value="{{ request('search') }}">
+                  </div>
+
+                  {{-- SEARCH: Email --}}
+                  <div class="col-md-4">
+                        <label class="form-label fw-semibold">Email</label>
+                        <input type="text" name="email" class="form-control"
+                              placeholder="Search email..."
+                              value="{{ request('email') }}">
+                  </div>
+
+                  {{-- SORTING --}}
+                  <div class="col-md-4">
+                        <label class="form-label fw-semibold">Sort By</label>
+                        <select name="sort" class="form-select">
+                              <option value="">Default (ID Asc)</option>
+                              <option value="id_asc" {{ request('sort') == 'id_asc' ? 'selected' : '' }}>ID: Ascending</option>
+                              <option value="id_desc" {{ request('sort') == 'id_desc' ? 'selected' : '' }}>ID: Descending</option>
+                              <option value="name_asc" {{ request('sort') == 'name_asc' ? 'selected' : '' }}>Name: A → Z</option>
+                              <option value="name_desc" {{ request('sort') == 'name_desc' ? 'selected' : '' }}>Name: Z → A</option>
+                        </select>
+                  </div>
+
+                  {{-- BUTTONS --}}
+                  <div class="col-12 d-flex justify-content-end gap-2">
+                        <a href="{{ route('members.index') }}" class="btn btn-outline-secondary btn-sm">
+                              Reset Filters
+                        </a>
+
+                        <button class="btn btn-primary btn-sm">
+                              Apply Filters
+                        </button>
+                  </div>
+
+            </form>
+
+
 
             {{-- TABLE WRAPPER --}}
             <div class="table-responsive border rounded-3 overflow-hidden">

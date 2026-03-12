@@ -16,13 +16,51 @@ class EventsController extends Controller
 
             $query = Event::query();
 
-            // (Filters will be added later)
-            // (Sorting will be added later)
+            // SEARCH: Title
+            if ($request->filled('search')) {
+                  $query->where('title', 'like', '%' . $request->search . '%');
+            }
 
-            $events = $query->paginate(10);
+            // FILTER: Category
+            if ($request->filled('category')) {
+                  $query->where('category', $request->category);
+            }
+
+            // FILTER: Location
+            if ($request->filled('location')) {
+                  $query->where('location', 'like', '%' . $request->location . '%');
+            }
+
+            // SORTING
+            if ($request->filled('sort')) {
+                  switch ($request->sort) {
+                        case 'date_asc':
+                              $query->orderBy('date_time', 'asc');
+                              break;
+
+                        case 'date_desc':
+                              $query->orderBy('date_time', 'desc');
+                              break;
+
+                        case 'title_asc':
+                              $query->orderBy('title', 'asc');
+                              break;
+
+                        case 'title_desc':
+                              $query->orderBy('title', 'desc');
+                              break;
+                  }
+            } else {
+                  // Default sorting
+                  $query->orderBy('date_time', 'asc');
+            }
+
+            // PAGINATION (preserve filters)
+            $events = $query->paginate(10)->appends($request->query());
 
             return view('events.index', compact('events'));
       }
+
 
       // Show create form
       public function create()
@@ -164,7 +202,54 @@ class EventsController extends Controller
       // Cards View
       public function cards(Request $request)
       {
-            $events = Event::paginate(10);
+            if (!session('isLoggedIn')) {
+                  return redirect('/login');
+            }
+
+            $query = Event::query();
+
+            // SEARCH: Title
+            if ($request->filled('search')) {
+                  $query->where('title', 'like', '%' . $request->search . '%');
+            }
+
+            // FILTER: Category
+            if ($request->filled('category')) {
+                  $query->where('category', $request->category);
+            }
+
+            // FILTER: Location
+            if ($request->filled('location')) {
+                  $query->where('location', 'like', '%' . $request->location . '%');
+            }
+
+            // SORTING
+            if ($request->filled('sort')) {
+                  switch ($request->sort) {
+                        case 'date_asc':
+                              $query->orderBy('date_time', 'asc');
+                              break;
+
+                        case 'date_desc':
+                              $query->orderBy('date_time', 'desc');
+                              break;
+
+                        case 'title_asc':
+                              $query->orderBy('title', 'asc');
+                              break;
+
+                        case 'title_desc':
+                              $query->orderBy('title', 'desc');
+                              break;
+                  }
+            } else {
+                  // Default sorting
+                  $query->orderBy('date_time', 'asc');
+            }
+
+            // PAGINATION (preserve filters)
+            $events = $query->paginate(10)->appends($request->query());
+
             return view('events.cards', compact('events'));
       }
 }

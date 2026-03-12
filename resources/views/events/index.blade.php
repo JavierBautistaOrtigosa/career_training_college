@@ -26,6 +26,62 @@
                   </div>
             </div>
 
+            {{-- FILTERS + SORTING --}}
+            <form method="GET" action="{{ route('events.index') }}" class="row g-3 mb-4">
+
+                  {{-- SEARCH: Title --}}
+                  <div class="col-md-3">
+                        <label class="form-label fw-semibold">Search Title</label>
+                        <input type="text" name="search" class="form-control"
+                              placeholder="Search events..."
+                              value="{{ request('search') }}">
+                  </div>
+
+                  {{-- FILTER: Category --}}
+                  <div class="col-md-3">
+                        <label class="form-label fw-semibold">Category</label>
+                        <select name="category" class="form-select">
+                              <option value="">All Categories</option>
+                              <option value="Workshop" {{ request('category') == 'Workshop' ? 'selected' : '' }}>Workshop</option>
+                              <option value="Seminar" {{ request('category') == 'Seminar' ? 'selected' : '' }}>Seminar</option>
+                              <option value="Training" {{ request('category') == 'Training' ? 'selected' : '' }}>Training</option>
+                        </select>
+                  </div>
+
+                  {{-- FILTER: Location --}}
+                  <div class="col-md-3">
+                        <label class="form-label fw-semibold">Location</label>
+                        <input type="text" name="location" class="form-control"
+                              placeholder="Search location..."
+                              value="{{ request('location') }}">
+                  </div>
+
+                  {{-- SORTING --}}
+                  <div class="col-md-3">
+                        <label class="form-label fw-semibold">Sort By</label>
+                        <select name="sort" class="form-select">
+                              <option value="">Default (Oldest First)</option>
+                              <option value="date_asc" {{ request('sort') == 'date_asc' ? 'selected' : '' }}>Date: Oldest → Newest</option>
+                              <option value="date_desc" {{ request('sort') == 'date_desc' ? 'selected' : '' }}>Date: Newest → Oldest</option>
+                              <option value="title_asc" {{ request('sort') == 'title_asc' ? 'selected' : '' }}>Title: A → Z</option>
+                              <option value="title_desc" {{ request('sort') == 'title_desc' ? 'selected' : '' }}>Title: Z → A</option>
+                        </select>
+                  </div>
+
+                  {{-- BUTTONS --}}
+                  <div class="col-12 d-flex justify-content-end gap-2">
+                        <a href="{{ route('events.index') }}" class="btn btn-outline-secondary btn-sm">
+                              Reset Filters
+                        </a>
+
+                        <button class="btn btn-primary btn-sm">
+                              Apply Filters
+                        </button>
+                  </div>
+
+            </form>
+
+
             {{-- TABLE WRAPPER --}}
             <div class="table-responsive border rounded-3 overflow-hidden">
                   <table class="table table-hover align-middle mb-0">

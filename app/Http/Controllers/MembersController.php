@@ -10,29 +10,58 @@ class MembersController extends Controller
       // List all members
       public function index(Request $request)
       {
-            // Manual login protection
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
             $query = Member::query();
 
-            // Search filter
-            if ($request->has('search') && $request->search !== '') {
+            // SEARCH: Name (first or last)
+            if ($request->filled('search')) {
                   $search = $request->search;
 
                   $query->where(function ($q) use ($search) {
                         $q->where('first_name', 'like', "%$search%")
-                              ->orWhere('last_name', 'like', "%$search%")
-                              ->orWhere('email', 'like', "%$search%");
+                              ->orWhere('last_name', 'like', "%$search%");
                   });
             }
 
-            // Pagination
-            $members = $query->paginate(10);
+            // SEARCH: Email
+            if ($request->filled('email')) {
+                  $query->where('email', 'like', '%' . $request->email . '%');
+            }
+
+            // SORTING
+            if ($request->filled('sort')) {
+                  switch ($request->sort) {
+                        case 'name_asc':
+                              $query->orderBy('first_name', 'asc')->orderBy('last_name', 'asc');
+                              break;
+
+                        case 'name_desc':
+                              $query->orderBy('first_name', 'desc')->orderBy('last_name', 'desc');
+                              break;
+
+                        case 'id_asc':
+                              $query->orderBy('id', 'asc');
+                              break;
+
+                        case 'id_desc':
+                              $query->orderBy('id', 'desc');
+                              break;
+                  }
+            } else {
+                  // Default sorting
+                  $query->orderBy('id', 'asc');
+            }
+
+            // PAGINATION (preserve filters)
+            $members = $query->paginate(10)->appends($request->query());
 
             return view('members.index', compact('members'));
       }
+
+
 
       // Show create form
       public function create()
@@ -182,9 +211,55 @@ class MembersController extends Controller
 
 
       //  Cards View
-      public function cards()
+      public function cards(Request $request)
       {
-            $members = Member::paginate(10);
+            if (!session('isLoggedIn')) {
+                  return redirect('/login');
+            }
+
+            $query = Member::query();
+
+            // SEARCH: Name
+            if ($request->filled('search')) {
+                  $search = $request->search;
+
+                  $query->where(function ($q) use ($search) {
+                        $q->where('first_name', 'like', "%$search%")
+                              ->orWhere('last_name', 'like', "%$search%");
+                  });
+            }
+
+            // SEARCH: Email
+            if ($request->filled('email')) {
+                  $query->where('email', 'like', '%' . $request->email . '%');
+            }
+
+            // SORTING
+            if ($request->filled('sort')) {
+                  switch ($request->sort) {
+                        case 'name_asc':
+                              $query->orderBy('first_name', 'asc')->orderBy('last_name', 'asc');
+                              break;
+
+                        case 'name_desc':
+                              $query->orderBy('first_name', 'desc')->orderBy('last_name', 'desc');
+                              break;
+
+                        case 'id_asc':
+                              $query->orderBy('id', 'asc');
+                              break;
+
+                        case 'id_desc':
+                              $query->orderBy('id', 'desc');
+                              break;
+                  }
+            } else {
+                  $query->orderBy('id', 'asc');
+            }
+
+            // PAGINATION (preserve filters)
+            $members = $query->paginate(10)->appends($request->query());
+
             return view('members.cards', compact('members'));
       }
 }
