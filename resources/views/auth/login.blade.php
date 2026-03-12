@@ -11,35 +11,61 @@
 
 <body class="bg-light">
 
-      <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-            <div class="card shadow-sm rounded-3" style="width: 420px;">
-                  <div class="card-body p-4">
+      <div class="container-fluid">
+            <div class="row" style="min-height: 100vh;">
 
-                        <h2 class="fw-bold mb-4 text-center">Login</h2>
+                  {{-- LEFT SIDE — WELCOME MESSAGE --}}
+                  <div class="col-md-6 d-flex flex-column justify-content-center align-items-start p-5 bg-white">
 
-                        @if(session('error'))
-                        <div class="alert alert-danger">{{ session('error') }}</div>
-                        @endif
+                        <h1 class="fw-bold mb-3">Welcome to the CTC Management App</h1>
 
-                        <form action="{{ route('login') }}" method="POST">
-                              @csrf
+                        <p class="text-muted fs-5 mb-4" style="max-width: 480px;">
+                              This system helps you manage members, events, and daily operations
+                              quickly and efficiently.
+                        </p>
 
-                              <div class="mb-3">
-                                    <label class="form-label fw-semibold">Email</label>
-                                    <input type="email" name="email" class="form-control" required>
-                              </div>
+                        <p class="text-muted small mt-4">
+                              Career Training College — Internal System
+                        </p>
+                  </div>
 
-                              <div class="mb-3">
-                                    <label class="form-label fw-semibold">Password</label>
-                                    <input type="password" name="password" class="form-control" required>
-                              </div>
+                  {{-- RIGHT SIDE — LOGIN FORM --}}
+                  <div class="col-md-6 d-flex justify-content-center align-items-center bg-light p-5">
 
-                              <button type="submit" class="btn btn-primary w-100 mt-3">
-                                    Login
-                              </button>
-                        </form>
+                        <div class="card shadow-sm rounded-3 p-4" style="width: 420px;">
+
+                              <h2 class="fw-bold mb-4 text-center">Login</h2>
+
+                              @if(session('success'))
+                              <div class="alert alert-success">{{ session('success') }}</div>
+                              @endif
+
+                              @if(session('error'))
+                              <div class="alert alert-danger">{{ session('error') }}</div>
+                              @endif
+
+                              <form action="{{ route('login') }}" method="POST">
+                                    @csrf
+
+                                    <div class="mb-3">
+                                          <label class="form-label fw-semibold">Email</label>
+                                          <input type="email" name="email" class="form-control" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                          <label class="form-label fw-semibold">Password</label>
+                                          <input type="password" name="password" class="form-control" required>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary w-100 mt-3">
+                                          Login
+                                    </button>
+                              </form>
+
+                        </div>
 
                   </div>
+
             </div>
       </div>
 

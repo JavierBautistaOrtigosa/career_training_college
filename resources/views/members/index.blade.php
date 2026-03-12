@@ -26,7 +26,7 @@
                               Add Member
                         </a>
                         @else
-                        <button class="btn btn-outline-primary btn-sm" disabled style="opacity:0; pointer-events:none;">
+                        <button class="btn btn-outline-primary btn-sm d-none">
                               Add Member
                         </button>
                         @endif
