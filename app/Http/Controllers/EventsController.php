@@ -96,7 +96,7 @@ class EventsController extends Controller
                   'title' => 'required',
                   'date_time' => 'required',
                   'location' => 'required',
-                  'category' => 'required',
+                  'category' => 'required|in:Workshop,Seminar,Training,Webinar',
                   'description' => 'nullable'
             ]);
 
@@ -146,7 +146,7 @@ class EventsController extends Controller
                   'title' => 'required',
                   'date_time' => 'required',
                   'location' => 'required',
-                  'category' => 'required',
+                  'category' => 'required|in:Workshop,Seminar,Training,Webinar',
                   'description' => 'nullable'
             ]);
 

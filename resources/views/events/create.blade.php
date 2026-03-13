@@ -41,13 +41,15 @@
 
                   <div class="mb-3">
                         <label class="form-label fw-semibold">Category</label>
-                        <input
-                              type="text"
-                              name="category"
-                              class="form-control"
-                              placeholder="Enter event category"
-                              required>
+                        <select name="category" class="form-select" required>
+                              <option value="">Select category</option>
+                              <option value="Workshop">Workshop</option>
+                              <option value="Seminar">Seminar</option>
+                              <option value="Training">Training</option>
+                              <option value="Webinar">Webinar</option>
+                        </select>
                   </div>
+
 
                   <div class="mb-3">
                         <label class="form-label fw-semibold">Description</label>
