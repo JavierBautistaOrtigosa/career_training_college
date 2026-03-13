@@ -58,21 +58,22 @@ class EventsController extends Controller
             // PAGINATION (preserve filters)
             $events = $query->paginate(10)->appends($request->query());
 
-            return view('events.index', compact('events'));
+            // FIX: categories for filter UI
+            $categories = Event::select('category')->distinct()->pluck('category');
+            return view('events.index', compact('events', 'categories'));
       }
 
 
       // Show create form
       public function create()
       {
-            // Manual login protection (class-demo style)
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
-            // Admin-only protection
+            // Admin-only protection (fixed)
             if (session('role') !== 'admin') {
-                  return redirect('/events')->with('error', 'You do not have permission to perform this action.');
+                  abort(403);
             }
 
             return view('events.create');
@@ -82,17 +83,15 @@ class EventsController extends Controller
       // Handle create form submission
       public function store(Request $request)
       {
-            // Manual login protection (class-demo style)
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
-            // Admin-only protection
+            // Admin-only protection (fixed)
             if (session('role') !== 'admin') {
-                  return redirect('/events')->with('error', 'You do not have permission to perform this action.');
+                  abort(403);
             }
 
-            // Validate form input
             $request->validate([
                   'title' => 'required',
                   'date_time' => 'required',
@@ -101,7 +100,6 @@ class EventsController extends Controller
                   'description' => 'nullable'
             ]);
 
-            // Create new event
             Event::create([
                   'title' => $request->title,
                   'date_time' => $request->date_time,
@@ -110,7 +108,6 @@ class EventsController extends Controller
                   'category' => $request->category
             ]);
 
-            // Redirect back to events list
             return redirect()->route('events.index');
       }
 
@@ -118,20 +115,17 @@ class EventsController extends Controller
       // Show edit form
       public function edit($id)
       {
-            // Manual login protection (class-demo style)
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
-            // Admin-only protection
+            // Admin-only protection (fixed)
             if (session('role') !== 'admin') {
-                  return redirect('/events')->with('error', 'You do not have permission to perform this action.');
+                  abort(403);
             }
 
-            // Find the event
             $event = Event::findOrFail($id);
 
-            // Return the edit view
             return view('events.edit', compact('event'));
       }
 
@@ -139,17 +133,15 @@ class EventsController extends Controller
       // Handle update form submission
       public function update(Request $request, $id)
       {
-            // Manual login protection (class-demo style)
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
-            // Admin-only protection
+            // Admin-only protection (fixed)
             if (session('role') !== 'admin') {
-                  return redirect('/events')->with('error', 'You do not have permission to perform this action.');
+                  abort(403);
             }
 
-            // Validate form input
             $request->validate([
                   'title' => 'required',
                   'date_time' => 'required',
@@ -158,10 +150,8 @@ class EventsController extends Controller
                   'description' => 'nullable'
             ]);
 
-            // Find the event
             $event = Event::findOrFail($id);
 
-            // Update the event
             $event->update([
                   'title' => $request->title,
                   'date_time' => $request->date_time,
@@ -170,7 +160,6 @@ class EventsController extends Controller
                   'category' => $request->category
             ]);
 
-            // Redirect back to events list
             return redirect()->route('events.index');
       }
 
@@ -178,23 +167,19 @@ class EventsController extends Controller
       // Delete an event
       public function destroy($id)
       {
-            // Manual login protection (class-demo style)
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
-            // Admin-only protection
+            // Admin-only protection (fixed)
             if (session('role') !== 'admin') {
-                  return redirect('/events')->with('error', 'You do not have permission to perform this action.');
+                  abort(403);
             }
 
-            // Find the event
             $event = Event::findOrFail($id);
 
-            // Delete the event
             $event->delete();
 
-            // Redirect back to events list
             return redirect()->route('events.index');
       }
 
@@ -243,13 +228,13 @@ class EventsController extends Controller
                               break;
                   }
             } else {
-                  // Default sorting
                   $query->orderBy('date_time', 'asc');
             }
 
-            // PAGINATION (preserve filters)
             $events = $query->paginate(10)->appends($request->query());
 
-            return view('events.cards', compact('events'));
+            // FIX: categories for filter UI (if cards view uses them)
+            $categories = Event::select('category')->distinct()->pluck('category');
+            return view('events.cards', compact('events', 'categories'));
       }
 }

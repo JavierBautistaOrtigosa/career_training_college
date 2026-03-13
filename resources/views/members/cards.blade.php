@@ -10,10 +10,19 @@
                   <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2 class="fw-bold heading-tight mb-0">Members (Card View)</h2>
 
-                        <a href="{{ route('members.index') }}" class="btn btn-outline-secondary">
-                              Table View
-                        </a>
+                        <div class="d-flex gap-2">
+                              <a href="{{ route('members.index') }}" class="btn btn-outline-secondary">
+                                    Table View
+                              </a>
+
+                              @if (session('role') === 'admin')
+                              <a href="{{ route('members.create') }}" class="btn btn-outline-success">
+                                    + Add New Member
+                              </a>
+                              @endif
+                        </div>
                   </div>
+
 
                   {{-- FILTERS --}}
                   <form method="GET" action="{{ route('members.cards') }}" class="row g-3 mb-4">

@@ -10,21 +10,28 @@
                   <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2 class="fw-bold heading-tight mb-0">Events</h2>
 
-                        @if (session('role') === 'admin')
-                        <a href="{{ route('events.create') }}" class="btn btn-outline-success">
-                              + Add New Event
-                        </a>
-                        @endif
+                        <div class="d-flex gap-2">
+                              <a href="{{ route('events.cards') }}" class="btn btn-outline-secondary">
+                                    Card View
+                              </a>
+
+                              @if (session('role') === 'admin')
+                              <a href="{{ route('events.create') }}" class="btn btn-outline-success">
+                                    + Add New Event
+                              </a>
+                              @endif
+                        </div>
                   </div>
+
 
                   {{-- FILTERS --}}
                   <form method="GET" action="{{ route('events.index') }}" class="row g-3 mb-4">
 
                         <div class="col-md-3">
                               <label class="form-label fw-semibold">Search Title</label>
-                              <input type="text" name="title" class="form-control"
+                              <input type="text" name="search" class="form-control"
                                     placeholder="Search event title..."
-                                    value="{{ request('title') }}">
+                                    value="{{ request('search') }}">
                         </div>
 
                         <div class="col-md-3">
@@ -51,8 +58,10 @@
                               <label class="form-label fw-semibold">Sort By</label>
                               <select name="sort" class="form-select">
                                     <option value="">Default (Oldest First)</option>
-                                    <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest First</option>
-                                    <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>Oldest First</option>
+                                    <option value="date_desc" {{ request('sort') == 'date_desc' ? 'selected' : '' }}>Newest First</option>
+                                    <option value="date_asc" {{ request('sort') == 'date_asc' ? 'selected' : '' }}>Oldest First</option>
+                                    <option value="title_asc" {{ request('sort') == 'title_asc' ? 'selected' : '' }}>Title A–Z</option>
+                                    <option value="title_desc" {{ request('sort') == 'title_desc' ? 'selected' : '' }}>Title Z–A</option>
                               </select>
                         </div>
 
@@ -62,6 +71,7 @@
                         </div>
 
                   </form>
+
 
                   {{-- TABLE --}}
                   <div class="table-responsive">

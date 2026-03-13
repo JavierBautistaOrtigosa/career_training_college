@@ -66,14 +66,13 @@ class MembersController extends Controller
       // Show create form
       public function create()
       {
-            // Manual login protection (class-demo style) 
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
-            // Admin-only protection
+            // Admin-only protection (fixed)
             if (session('role') !== 'admin') {
-                  return redirect('/members')->with('error', 'You do not have permission to perform this action.');
+                  abort(403);
             }
 
             return view('members.create');
@@ -83,14 +82,13 @@ class MembersController extends Controller
       // Handle create form submission
       public function store(Request $request)
       {
-            // Manual login protection (class-demo style)
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
-            // Admin-only protection
+            // Admin-only protection (fixed)
             if (session('role') !== 'admin') {
-                  return redirect('/members')->with('error', 'You do not have permission to perform this action.');
+                  abort(403);
             }
 
             // Validate form input
@@ -102,7 +100,6 @@ class MembersController extends Controller
                   'phone' => 'required|regex:/^[0-9]{8,15}$/',
                   'address' => 'required',
                   'professional_summary' => 'nullable'
-
             ]);
 
             // Create new member
@@ -114,10 +111,8 @@ class MembersController extends Controller
                   'phone' => $request->phone,
                   'address' => $request->address,
                   'professional_summary' => $request->professional_summary
-
             ]);
 
-            // Redirect back to members list
             return redirect()->route('members.index')->with('success', 'Member added successfully.');
       }
 
@@ -125,37 +120,32 @@ class MembersController extends Controller
       // Show edit form
       public function edit($id)
       {
-            // Manual login protection (class-demo style)
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
-            // Admin-only protection
+            // Admin-only protection (fixed)
             if (session('role') !== 'admin') {
-                  return redirect('/members')->with('error', 'You do not have permission to perform this action.');
+                  abort(403);
             }
 
-            // Find the member
             $member = Member::findOrFail($id);
 
-            // Return the edit view
             return view('members.edit', compact('member'));
       }
 
       // Handle update form submission
       public function update(Request $request, $id)
       {
-            // Manual login protection (class-demo style)
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
-            // Admin-only protection
+            // Admin-only protection (fixed)
             if (session('role') !== 'admin') {
-                  return redirect('/members')->with('error', 'You do not have permission to perform this action.');
+                  abort(403);
             }
 
-            // Validate form input
             $request->validate([
                   'first_name' => 'required',
                   'last_name' => 'required',
@@ -164,13 +154,10 @@ class MembersController extends Controller
                   'phone' => 'required|regex:/^[0-9]{8,15}$/',
                   'address' => 'required',
                   'professional_summary' => 'nullable'
-
             ]);
 
-            // Find the member
             $member = Member::findOrFail($id);
 
-            // Update the member
             $member->update([
                   'first_name' => $request->first_name,
                   'last_name' => $request->last_name,
@@ -179,38 +166,32 @@ class MembersController extends Controller
                   'phone' => $request->phone,
                   'address' => $request->address,
                   'professional_summary' => $request->professional_summary
-
             ]);
 
-            // Redirect back to members list
             return redirect()->route('members.index')->with('success', 'Member updated successfully.');
       }
 
       // Delete a member
       public function destroy($id)
       {
-            // Manual login protection (class-demo style)
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
-            // Admin-only protection
+            // Admin-only protection (fixed)
             if (session('role') !== 'admin') {
-                  return redirect('/members')->with('error', 'You do not have permission to perform this action.');
+                  abort(403);
             }
 
-            // Find the member
             $member = Member::findOrFail($id);
 
-            // Delete the member
             $member->delete();
 
-            // Redirect back to members list
             return redirect()->route('members.index')->with('success', 'Member deleted successfully.');
       }
 
 
-      //  Cards View
+      // Cards View
       public function cards(Request $request)
       {
             if (!session('isLoggedIn')) {
@@ -257,7 +238,6 @@ class MembersController extends Controller
                   $query->orderBy('id', 'asc');
             }
 
-            // PAGINATION (preserve filters)
             $members = $query->paginate(10)->appends($request->query());
 
             return view('members.cards', compact('members'));

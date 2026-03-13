@@ -9,12 +9,17 @@
                   {{-- HEADER --}}
                   <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2 class="fw-bold heading-tight mb-0">Members</h2>
+                        <div class="d-flex gap-2">
+                              <a href="{{ route('members.cards') }}" class="btn btn-outline-secondary">
+                                    Card View
+                              </a>
 
-                        @if (session('role') === 'admin')
-                        <a href="{{ route('members.create') }}" class="btn btn-outline-success">
-                              + Add New Member
-                        </a>
-                        @endif
+                              @if (session('role') === 'admin')
+                              <a href="{{ route('members.create') }}" class="btn btn-outline-success">
+                                    + Add New Member
+                              </a>
+                              @endif
+                        </div>
                   </div>
 
                   {{-- FILTERS --}}
