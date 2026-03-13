@@ -81,12 +81,27 @@
 
                                     @if($event->image_path)
                                     <img src="{{ asset('storage/' . $event->image_path) }}"
-                                          class="card-img-top"
+                                          class="card-img-top object-fit-cover"
+                                          style="height: 180px;"
                                           alt="Event Image">
+
                                     @else
-                                    <div class="bg-light text-center py-5 rounded-top">
-                                          <span class="text-muted">No Image</span>
-                                    </div>
+                                    <!-- No image placeholder - Option 1 -->
+                                    <img src="{{ asset('images/event_placeholder_1.jpg') }}"
+                                          class="card-img-top object-fit-cover"
+                                          style="height: 180px;"
+                                          alt="Placeholder Image">
+                                    <!-- No image Bootstrap placeholder - Option 2 -->
+                                    <!-- <div class="d-flex align-items-center justify-content-center bg-light rounded-top"
+                                          style="height: 180px;">
+                                          <svg width="48" height="48" fill="#adb5bd" viewBox="0 0 16 16">
+                                                <path d="M14 2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM2 1h12a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H2a3 3 0 0 1-3-3V4a3 3 0 0 1 3-3z" />
+                                                <path d="M10.648 8.646a.5.5 0 0 1 .704.704l-3 3a.5.5 0 0 1-.704 0l-1.5-1.5a.5.5 0 1 1 .704-.704L8 11.293l2.648-2.647z" />
+                                                <circle cx="5" cy="6" r="1.5" />
+                                          </svg>
+                                    </div> -->
+
+
                                     @endif
 
                                     <div class="card-body p-3">

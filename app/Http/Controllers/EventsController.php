@@ -87,7 +87,6 @@ class EventsController extends Controller
                   return redirect('/login');
             }
 
-            // Admin-only protection (fixed)
             if (session('role') !== 'admin') {
                   abort(403);
             }
@@ -97,19 +96,29 @@ class EventsController extends Controller
                   'date_time' => 'required',
                   'location' => 'required',
                   'category' => 'required|in:Workshop,Seminar,Training,Webinar',
-                  'description' => 'nullable'
+                  'description' => 'nullable',
+                  'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             ]);
+
+            // IMAGE UPLOAD
+            $path = null;
+            if ($request->hasFile('image')) {
+                  $path = $request->file('image')->store('event_images', 'public');
+            }
 
             Event::create([
                   'title' => $request->title,
                   'date_time' => $request->date_time,
                   'location' => $request->location,
                   'description' => $request->description,
-                  'category' => $request->category
+                  'category' => $request->category,
+                  'image_path' => $path
             ]);
 
-            return redirect()->route('events.index');
+            return redirect()->route('events.index')
+                  ->with('success', 'Event created successfully!');
       }
+
 
 
       // Show edit form
@@ -137,7 +146,6 @@ class EventsController extends Controller
                   return redirect('/login');
             }
 
-            // Admin-only protection (fixed)
             if (session('role') !== 'admin') {
                   abort(403);
             }
@@ -147,21 +155,41 @@ class EventsController extends Controller
                   'date_time' => 'required',
                   'location' => 'required',
                   'category' => 'required|in:Workshop,Seminar,Training,Webinar',
-                  'description' => 'nullable'
+                  'description' => 'nullable',
+                  'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             ]);
 
             $event = Event::findOrFail($id);
 
+            // IMAGE RE-UPLOAD LOGIC
+            if ($request->hasFile('image')) {
+
+                  // Delete old image if it exists
+                  if ($event->image_path && \Storage::disk('public')->exists($event->image_path)) {
+                        \Storage::disk('public')->delete($event->image_path);
+                  }
+
+                  // Store new image
+                  $newPath = $request->file('image')->store('event_images', 'public');
+
+                  // Update model field
+                  $event->image_path = $newPath;
+            }
+
+            // Update all other fields
             $event->update([
                   'title' => $request->title,
                   'date_time' => $request->date_time,
                   'location' => $request->location,
                   'description' => $request->description,
-                  'category' => $request->category
+                  'category' => $request->category,
+                  'image_path' => $event->image_path
             ]);
 
-            return redirect()->route('events.index');
+            return redirect()->route('events.index')
+                  ->with('success', 'Event updated successfully!');
       }
+
 
 
       // Delete an event

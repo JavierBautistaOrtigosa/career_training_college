@@ -7,7 +7,7 @@
 <div class="card shadow-sm rounded-3 mb-4">
       <div class="card-body p-4">
 
-            <form action="{{ route('events.store') }}" method="POST">
+            <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
                   @csrf
 
                   <div class="mb-3">
@@ -59,6 +59,16 @@
                               rows="3"
                               placeholder="Enter event description"></textarea>
                   </div>
+
+                  <div class="mb-3">
+                        <label class="form-label fw-semibold">Event Image (optional)</label>
+                        <input
+                              type="file"
+                              name="image"
+                              class="form-control"
+                              accept="image/*">
+                  </div>
+
 
                   <div class="d-flex justify-content-end gap-2 mt-4">
                         <a href="{{ route('events.index') }}" class="btn btn-secondary">

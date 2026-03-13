@@ -7,7 +7,7 @@
 <div class="card shadow-sm rounded-3 mb-4">
       <div class="card-body p-4">
 
-            <form action="{{ route('events.update', $event->id) }}" method="POST">
+            <form action="{{ route('events.update', $event->id) }}" method="POST" enctype="multipart/form-data">
                   @csrf
                   @method('PUT')
 
@@ -43,12 +43,13 @@
 
                   <div class="mb-3">
                         <label class="form-label fw-semibold">Category</label>
-                        <input
-                              type="text"
-                              name="category"
-                              class="form-control"
-                              value="{{ $event->category }}"
-                              required>
+                        <select name="category" class="form-select" required>
+                              <option value="">Select category</option>
+                              <option value="Workshop" {{ $event->category == 'Workshop' ? 'selected' : '' }}>Workshop</option>
+                              <option value="Seminar" {{ $event->category == 'Seminar' ? 'selected' : '' }}>Seminar</option>
+                              <option value="Training" {{ $event->category == 'Training' ? 'selected' : '' }}>Training</option>
+                              <option value="Webinar" {{ $event->category == 'Webinar' ? 'selected' : '' }}>Webinar</option>
+                        </select>
                   </div>
 
                   <div class="mb-3">
@@ -57,6 +58,28 @@
                               name="description"
                               class="form-control"
                               rows="3">{{ $event->description }}</textarea>
+                  </div>
+
+                  {{-- IMAGE PREVIEW --}}
+                  <div class="mb-3">
+                        <label class="form-label fw-semibold">Current Image</label>
+
+                        @if ($event->image_path)
+                        <div class="mb-2">
+                              <img src="{{ asset('storage/' . $event->image_path) }}"
+                                    alt="Event Image"
+                                    class="img-fluid rounded"
+                                    style="max-height: 180px; object-fit: cover;">
+                        </div>
+                        @else
+                        <p class="text-muted">No image uploaded.</p>
+                        @endif
+                  </div>
+
+                  {{-- IMAGE RE-UPLOAD --}}
+                  <div class="mb-3">
+                        <label class="form-label fw-semibold">Upload New Image (optional)</label>
+                        <input type="file" name="image" class="form-control" accept="image/*">
                   </div>
 
                   <div class="d-flex justify-content-end gap-2 mt-4">
