@@ -142,31 +142,50 @@
     border-color: #198754;
 }
 */
-
-.pagination .page-link {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
+/* Center the pagination */
+.my-paginator nav {
+    display: flex;
+    justify-content: center;
 }
 
+/* Remove summary text */
 .my-paginator p {
     display: none !important;
 }
 
+/* Base pagination style */
+.my-paginator .pagination {
+    gap: 0.35rem; /* spacing between items */
+}
+
+/* Page links */
 .my-paginator .page-link {
-    border: 1px solid #dee2e6;
-    background-color: transparent;
+    border: 1px solid #d0d7de;
+    background: transparent;
     color: #0d6efd;
+    padding: 0.35rem 0.65rem;
+    font-size: 0.875rem;
+    border-radius: 6px;
+    min-width: 36px;
+    text-align: center;
 }
 
+/* Hover */
 .my-paginator .page-link:hover {
-    background-color: #f8f9fa;
+    background: #f8f9fa;
 }
 
+/* Active page */
 .my-paginator .active > .page-link {
-    background-color: transparent !important;
-    color: #0d6efd !important;
+    background: transparent !important;
     border-color: #0d6efd !important;
+    color: #0d6efd !important;
     font-weight: 600;
+}
+
+/* Disabled arrows */
+.my-paginator .disabled > .page-link {
+    opacity: 0.4;
 }
 
 table thead th {

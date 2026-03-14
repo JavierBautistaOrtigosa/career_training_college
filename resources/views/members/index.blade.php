@@ -3,86 +3,95 @@
 @section('content')
 <div class="container mt-4">
 
-      {{-- MODULE HEADER --}}
-      <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="fw-bold heading-tight mb-0">Members</h2>
+      {{-- MAIN CARD (filters + buttons + table) --}}
+      <div class="card-premium card-hover rounded-3">
+            <div class="card-body p-3">
 
-            <div class="action-buttons">
-                  <a href="{{ route('members.cards') }}" class="btn btn-outline-secondary">Card View</a>
+                  {{-- CARD HEADER + TOP TOOLBAR (ONE ROW) --}}
+                  <div class="d-flex justify-content-between align-items-center mb-3">
 
-                  @if (session('role') === 'admin')
-                  <a href="{{ route('members.create') }}" class="btn btn-green">+ Add New Member</a>
-                  @endif
-            </div>
-      </div>
+                        {{-- LEFT: TITLE --}}
+                        <h4 class="fw-semibold mb-0">Members Table</h4>
 
-      {{-- FILTER BAR (wrapped in its own card) --}}
-      <div class="card-premium card-hover rounded-3 mb-4">
-            <div class="card-body p-1 p-tight">
+                        {{-- RIGHT: BUTTONS --}}
+                        <div class="d-flex gap-2">
 
-                  <form method="GET" action="{{ route('members.index') }}" class="row g-2">
+                              {{-- FILTERS TOGGLE BUTTON --}}
+                              <button type="button" id="toggleFilters"
+                                    class="btn btn-outline-secondary rounded-3">
+                                    Filters
+                              </button>
 
-                        {{-- ROW 1: FILTER INPUTS (FULL WIDTH) --}}
-                        <div class="col-md-4">
-                              <label class="form-label fw-semibold">Search Name</label>
-                              <input type="text" name="search" class="form-control"
-                                    placeholder="Search first or last name..."
-                                    value="{{ request('search') }}">
-                        </div>
-
-                        <div class="col-md-4">
-                              <label class="form-label fw-semibold">Email</label>
-                              <input type="text" name="email" class="form-control"
-                                    placeholder="Search email..."
-                                    value="{{ request('email') }}">
-                        </div>
-
-                        <div class="col-md-4">
-                              <label class="form-label fw-semibold">Sort By</label>
-                              <select name="sort" class="form-select">
-                                    <option value="">Default (ID Asc)</option>
-                                    <option value="id_asc" {{ request('sort') == 'id_asc' ? 'selected' : '' }}>ID: Ascending</option>
-                                    <option value="id_desc" {{ request('sort') == 'id_desc' ? 'selected' : '' }}>ID: Descending</option>
-                                    <option value="name_asc" {{ request('sort') == 'name_asc' ? 'selected' : '' }}>Name: A → Z</option>
-                                    <option value="name_desc" {{ request('sort') == 'name_desc' ? 'selected' : '' }}>Name: Z → A</option>
-                              </select>
-                        </div>
-
-                        {{-- ROW 2: BUTTONS (COMPACT, RIGHT-ALIGNED) --}}
-                        <div class="col-12 d-flex justify-content-end gap-2">
-
-                              {{-- RESET --}}
-                              <a href="{{ route('members.index') }}"
-                                    class="btn btn-outline-secondary rounded-3 d-flex justify-content-center align-items-center gap-1">
-                                    <i class="bi bi-arrow-counterclockwise"></i>
-                                    Reset
+                              <a href="{{ route('members.cards') }}" class="btn btn-outline-secondary rounded-3">
+                                    Card View
                               </a>
 
-                              {{-- APPLY --}}
-                              <button class="btn btn-outline-primary rounded-3 d-flex justify-content-center align-items-center gap-1">
-                                    <i class="bi bi-check2"></i>
-                                    Apply
-                              </button>
+                              @if (session('role') === 'admin')
+                              <a href="{{ route('members.create') }}" class="btn btn-green rounded-3">
+                                    + Add New Member
+                              </a>
+                              @endif
+
+                        </div>
+
+                  </div>
+
+                  {{-- START FORM --}}
+                  <form method="GET" action="{{ route('members.index') }}">
+
+                        {{-- FILTERS ROW (INCLUDING RESET + APPLY) --}}
+                        <div id="filtersContainer" class="row g-2 mb-3 d-none">
+
+
+                              <div class="col-md-3">
+                                    <label class="form-label fw-semibold">Search Name</label>
+                                    <input type="text" name="search" class="form-control"
+                                          placeholder="Search first or last name..."
+                                          value="{{ request('search') }}">
+                              </div>
+
+                              <div class="col-md-3">
+                                    <label class="form-label fw-semibold">Email</label>
+                                    <input type="text" name="email" class="form-control"
+                                          placeholder="Search email..."
+                                          value="{{ request('email') }}">
+                              </div>
+
+                              <div class="col-md-3">
+                                    <label class="form-label fw-semibold">Sort By</label>
+                                    <select name="sort" class="form-select">
+                                          <option value="">Default (ID Asc)</option>
+                                          <option value="id_asc" {{ request('sort') == 'id_asc' ? 'selected' : '' }}>ID: Ascending</option>
+                                          <option value="id_desc" {{ request('sort') == 'id_desc' ? 'selected' : '' }}>ID: Descending</option>
+                                          <option value="name_asc" {{ request('sort') == 'name_asc' ? 'selected' : '' }}>Name: A → Z</option>
+                                          <option value="name_desc" {{ request('sort') == 'name_desc' ? 'selected' : '' }}>Name: Z → A</option>
+                                    </select>
+                              </div>
+
+                              {{-- RESET + APPLY --}}
+                              <div class="col-md-3 d-flex justify-content-end align-items-end gap-2">
+
+                                    <a href="{{ route('members.index') }}"
+                                          class="btn btn-outline-secondary rounded-3 d-flex align-items-center gap-1">
+                                          <i class="bi bi-arrow-counterclockwise"></i>
+                                          Reset
+                                    </a>
+
+                                    <button class="btn btn-outline-primary rounded-3 d-flex align-items-center gap-1">
+                                          <i class="bi bi-check2"></i>
+                                          Apply
+                                    </button>
+
+                              </div>
 
                         </div>
 
                   </form>
-
-
-
-            </div>
-      </div>
-
-
-
-      {{-- CARD BODY (table only) --}}
-      <div class="card-premium card-hover rounded-3">
-            <div class="card-body p-1 p-tight">
+                  {{-- END FORM --}}
 
                   {{-- TABLE --}}
                   <div class="table-responsive">
                         <table class="table table-hover table-sm table-borderless">
-                              <!-- <table class="table table-hover table-sm align-middle"> -->
                               <thead class="border-bottom">
                                     <tr>
                                           <th class="pb-2">ID</th>
@@ -103,16 +112,6 @@
                                           <td>{{ $member->age }}</td>
 
                                           @if (session('role') === 'admin')
-                                          <!-- <td class="text-end">
-                                                <a href="{{ route('members.edit', $member->id) }}" class="btn btn-outline-primary btn-sm">Edit</a>
-
-                                                <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="d-inline">
-                                                      @csrf
-                                                      @method('DELETE')
-                                                      <button class="btn btn-outline-danger btn-sm"
-                                                            onclick="return confirm('Are you sure?')">Delete</button>
-                                                </form>
-                                          </td> -->
                                           <td class="text-end">
 
                                                 {{-- EDIT ICON --}}
@@ -134,28 +133,31 @@
                                                 </form>
 
                                           </td>
-
-
                                           @endif
                                     </tr>
                                     @endforeach
                               </tbody>
-
                         </table>
                   </div>
 
+                  {{-- PAGINATION --}}
                   <div class="mt-0 pt-3 border-top pb-0 mb-0 d-flex justify-content-center">
                         <div class="my-paginator">
                               {{ $members->links() }}
                         </div>
                   </div>
 
-
-
-
-
             </div>
       </div>
 
 </div>
+
+{{-- FILTER TOGGLE SCRIPT --}}
+<script>
+      document.getElementById('toggleFilters').addEventListener('click', function() {
+            const filters = document.getElementById('filtersContainer');
+            filters.classList.toggle('d-none');
+      });
+</script>
+
 @endsection
