@@ -1,0 +1,45 @@
+/* ---------------------------------------------------------
+   LOGIN PAGE — soft green theme
+--------------------------------------------------------- */
+
+body.login-page {
+    background: linear-gradient(135deg, #c6ecd56d 0%, #68d69a 80%);
+}
+
+/* Login card v1 */
+.login-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.06),
+        0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Logo */
+.login-logo {
+    width: 120px;
+    margin-bottom: 1rem;
+}
+
+/* Green button */
+.btn-green {
+    background-color: #4caf50;
+    border: none;
+    color: #fff;
+}
+
+.btn-green:hover {
+    background-color: #449a48;
+}
+
+/* Forgot password link */
+.forgot-link {
+    font-size: 0.9rem;
+    color: #4caf50;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+    color: #3d8c42;
+}
