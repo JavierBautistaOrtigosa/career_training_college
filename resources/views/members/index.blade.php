@@ -20,53 +20,6 @@
       <div class="card-premium card-hover rounded-3 mb-4">
             <div class="card-body p-1 p-tight">
 
-                  <!-- <form method="GET" action="{{ route('members.index') }}" class="row g-2">
-
-                        {{-- ROW 1: FILTER INPUTS --}}
-                        <div class="col-md-4">
-                              <label class="form-label fw-semibold">Search Name</label>
-                              <input type="text" name="search" class="form-control"
-                                    placeholder="Search first or last name..."
-                                    value="{{ request('search') }}">
-                        </div>
-
-                        <div class="col-md-4">
-                              <label class="form-label fw-semibold">Email</label>
-                              <input type="text" name="email" class="form-control"
-                                    placeholder="Search email..."
-                                    value="{{ request('email') }}">
-                        </div>
-
-                        <div class="col-md-4">
-                              <label class="form-label fw-semibold">Sort By</label>
-                              <select name="sort" class="form-select">
-                                    <option value="">Default (ID Asc)</option>
-                                    <option value="id_asc" {{ request('sort') == 'id_asc' ? 'selected' : '' }}>ID: Ascending</option>
-                                    <option value="id_desc" {{ request('sort') == 'id_desc' ? 'selected' : '' }}>ID: Descending</option>
-                                    <option value="name_asc" {{ request('sort') == 'name_asc' ? 'selected' : '' }}>Name: A → Z</option>
-                                    <option value="name_desc" {{ request('sort') == 'name_desc' ? 'selected' : '' }}>Name: Z → A</option>
-                              </select>
-                        </div>
-
-                        {{-- ROW 2: BUTTONS (UNCHANGED) --}}
-                        <div class="col-12 d-flex justify-content-end gap-2">
-
-                              {{-- RESET --}}
-                              <a href="{{ route('members.index') }}"
-                                    class="btn btn-outline-secondary w-100 d-flex justify-content-center align-items-center gap-1">
-                                    <i class="bi bi-arrow-counterclockwise"></i>
-                                    Reset
-                              </a>
-
-                              {{-- APPLY --}}
-                              <button class="btn btn-outline-primary w-100 d-flex justify-content-center align-items-center gap-1">
-                                    <i class="bi bi-check2"></i>
-                                    Apply
-                              </button>
-
-                        </div>
-
-                  </form> -->
                   <form method="GET" action="{{ route('members.index') }}" class="row g-2">
 
                         {{-- ROW 1: FILTER INPUTS (FULL WIDTH) --}}
@@ -100,13 +53,13 @@
 
                               {{-- RESET --}}
                               <a href="{{ route('members.index') }}"
-                                    class="btn btn-outline-secondary d-flex justify-content-center align-items-center gap-1">
+                                    class="btn btn-outline-secondary rounded-3 d-flex justify-content-center align-items-center gap-1">
                                     <i class="bi bi-arrow-counterclockwise"></i>
                                     Reset
                               </a>
 
                               {{-- APPLY --}}
-                              <button class="btn btn-outline-primary d-flex justify-content-center align-items-center gap-1">
+                              <button class="btn btn-outline-primary rounded-3 d-flex justify-content-center align-items-center gap-1">
                                     <i class="bi bi-check2"></i>
                                     Apply
                               </button>
@@ -191,11 +144,12 @@
                         </table>
                   </div>
 
-                  <div class="mt-0 pt-3 border-top pb-0 mb-0 d-flex justify-content-end">
+                  <div class="mt-0 pt-3 border-top pb-0 mb-0 d-flex justify-content-center">
                         <div class="my-paginator">
                               {{ $members->links() }}
                         </div>
                   </div>
+
 
 
 
