@@ -3,12 +3,25 @@
 --------------------------------------------------------- */
 
 body.login-page {
-    background: linear-gradient(135deg, #c6ecd56d 0%, #68d69a 80%);
+    background: linear-gradient(135deg, #ecf3efe8 0%, #3cad85 80%);
 }
 
 /* Login card wrapper (width only) */
+/* .login-card {
+    width: 420px;
+} */
+
+/* ---------------------------------------------------------
+   LOGIN CARD — clean, premium, isolated from dashboard UI
+--------------------------------------------------------- */
 .login-card {
     width: 420px;
+    background: #ffffffab;
+    border-radius: 14px;
+    padding: 2rem 2.25rem;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.06),
+        0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 /* Logo */
@@ -25,4 +38,9 @@ body.login-page {
 .forgot-link:hover {
     text-decoration: underline;
     color: #3d8c42;
+}
+
+.login-logo {
+    width: 200px; /* or 180px, or 200px */
+    margin-bottom: 1rem;
 }
