@@ -131,3 +131,23 @@
 .card-actions-bottom {
     margin-top: auto; /* pins to bottom */
 }
+/* 
+.my-paginator .page-link {
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+}
+
+.my-paginator .page-item.active .page-link {
+    background-color: #198754;
+    border-color: #198754;
+}
+*/
+
+.pagination .page-link {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+.my-paginator p {
+    display: none !important;
+}

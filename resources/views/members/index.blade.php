@@ -116,10 +116,23 @@
                         </table>
                   </div>
 
-                  {{-- PAGINATION --}}
+                  <!-- {{-- PAGINATION --}}
                   <div class="mt-2 pt-4 border-top pb-0 mb-0">
                         {{ $members->links() }}
+                  </div> -->
+
+                  <!-- <div class="my-paginator">
+                        {{ $members->links('pagination::bootstrap-5') }}
+                  </div> -->
+
+                  <div class="mt-0 pt-3 border-top pb-0 mb-0 d-flex justify-content-end">
+                        <div class="my-paginator">
+                              {{ $members->links() }}
+                        </div>
                   </div>
+
+
+
 
             </div>
       </div>
