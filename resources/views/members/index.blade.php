@@ -11,7 +11,7 @@
                   <div class="d-flex justify-content-between align-items-center mb-3">
 
                         {{-- LEFT: TITLE --}}
-                        <h4 class="fw-semibold mb-0">Members Table</h4>
+                        <h4 class="fw-semibold mb-0">Members list</h4>
 
                         {{-- RIGHT: BUTTONS --}}
                         <div class="d-flex gap-2">
@@ -42,22 +42,24 @@
                         {{-- FILTERS ROW (INCLUDING RESET + APPLY) --}}
                         <div id="filtersContainer" class="row g-2 mb-3 d-none">
 
-
-                              <div class="col-md-3">
+                              {{-- SEARCH NAME --}}
+                              <div class="col-md-4">
                                     <label class="form-label fw-semibold">Search Name</label>
                                     <input type="text" name="search" class="form-control"
                                           placeholder="Search first or last name..."
                                           value="{{ request('search') }}">
                               </div>
 
-                              <div class="col-md-3">
+                              {{-- EMAIL --}}
+                              <div class="col-md-4">
                                     <label class="form-label fw-semibold">Email</label>
                                     <input type="text" name="email" class="form-control"
                                           placeholder="Search email..."
                                           value="{{ request('email') }}">
                               </div>
 
-                              <div class="col-md-3">
+                              {{-- SORT BY --}}
+                              <div class="col-md-4">
                                     <label class="form-label fw-semibold">Sort By</label>
                                     <select name="sort" class="form-select">
                                           <option value="">Default (ID Asc)</option>
@@ -68,16 +70,16 @@
                                     </select>
                               </div>
 
-                              {{-- RESET + APPLY --}}
-                              <div class="col-md-3 d-flex justify-content-end align-items-end gap-2">
+                              {{-- RESET + APPLY (FULL ROW, RIGHT ALIGNED) --}}
+                              <div class="col-12 text-end">
 
                                     <a href="{{ route('members.index') }}"
-                                          class="btn btn-outline-secondary rounded-3 d-flex align-items-center gap-1">
+                                          class="btn btn-outline-secondary rounded-3 d-inline-flex align-items-center gap-1">
                                           <i class="bi bi-arrow-counterclockwise"></i>
                                           Reset
                                     </a>
 
-                                    <button class="btn btn-outline-primary rounded-3 d-flex align-items-center gap-1">
+                                    <button class="btn btn-outline-primary rounded-3 d-inline-flex align-items-center gap-1">
                                           <i class="bi bi-check2"></i>
                                           Apply
                                     </button>
@@ -86,69 +88,73 @@
 
                         </div>
 
-                  </form>
-                  {{-- END FORM --}}
-
-                  {{-- TABLE --}}
-                  <div class="table-responsive">
-                        <table class="table table-hover table-sm table-borderless">
-                              <thead class="border-bottom">
-                                    <tr>
-                                          <th class="pb-2">ID</th>
-                                          <th class="pb-2">Name</th>
-                                          <th class="pb-2">Email</th>
-                                          <th class="pb-2">Age</th>
-                                          @if (session('role') === 'admin')
-                                          <th class="pb-2 text-end">Actions</th>
-                                          @endif
-                                    </tr>
-                              </thead>
-                              <tbody>
-                                    @foreach($members as $member)
-                                    <tr>
-                                          <td>{{ $member->id }}</td>
-                                          <td>{{ $member->first_name }} {{ $member->last_name }}</td>
-                                          <td>{{ $member->email }}</td>
-                                          <td>{{ $member->age }}</td>
-
-                                          @if (session('role') === 'admin')
-                                          <td class="text-end">
-
-                                                {{-- EDIT ICON --}}
-                                                <a href="{{ route('members.edit', $member->id) }}"
-                                                      class="action-icon icon-edit me-2">
-                                                      <i class="bi bi-pencil-square"></i>
-                                                </a>
-
-                                                {{-- DELETE ICON --}}
-                                                <form action="{{ route('members.destroy', $member->id) }}"
-                                                      method="POST" class="d-inline">
-                                                      @csrf
-                                                      @method('DELETE')
-
-                                                      <button class="action-icon icon-delete"
-                                                            onclick="return confirm('Are you sure?')">
-                                                            <i class="bi bi-trash"></i>
-                                                      </button>
-                                                </form>
-
-                                          </td>
-                                          @endif
-                                    </tr>
-                                    @endforeach
-                              </tbody>
-                        </table>
-                  </div>
-
-                  {{-- PAGINATION --}}
-                  <div class="mt-0 pt-3 border-top pb-0 mb-0 d-flex justify-content-center">
-                        <div class="my-paginator">
-                              {{ $members->links() }}
-                        </div>
-                  </div>
 
             </div>
+
+
+            </form>
+            {{-- END FORM --}}
+
+            {{-- TABLE --}}
+            <div class="table-responsive">
+                  <table class="table table-hover table-sm table-borderless">
+                        <thead class="border-bottom">
+                              <tr>
+                                    <th class="pb-2">ID</th>
+                                    <th class="pb-2">Name</th>
+                                    <th class="pb-2">Email</th>
+                                    <th class="pb-2">Age</th>
+                                    @if (session('role') === 'admin')
+                                    <th class="pb-2 text-end">Actions</th>
+                                    @endif
+                              </tr>
+                        </thead>
+                        <tbody>
+                              @foreach($members as $member)
+                              <tr>
+                                    <td>{{ $member->id }}</td>
+                                    <td>{{ $member->first_name }} {{ $member->last_name }}</td>
+                                    <td>{{ $member->email }}</td>
+                                    <td>{{ $member->age }}</td>
+
+                                    @if (session('role') === 'admin')
+                                    <td class="text-end">
+
+                                          {{-- EDIT ICON --}}
+                                          <a href="{{ route('members.edit', $member->id) }}"
+                                                class="action-icon icon-edit me-2">
+                                                <i class="bi bi-pencil-square"></i>
+                                          </a>
+
+                                          {{-- DELETE ICON --}}
+                                          <form action="{{ route('members.destroy', $member->id) }}"
+                                                method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button class="action-icon icon-delete"
+                                                      onclick="return confirm('Are you sure?')">
+                                                      <i class="bi bi-trash"></i>
+                                                </button>
+                                          </form>
+
+                                    </td>
+                                    @endif
+                              </tr>
+                              @endforeach
+                        </tbody>
+                  </table>
+            </div>
+
+            {{-- PAGINATION --}}
+            <div class="mt-0 pt-3 border-top pb-0 mb-0 d-flex justify-content-center">
+                  <div class="my-paginator">
+                        {{ $members->links() }}
+                  </div>
+            </div>
+
       </div>
+</div>
 
 </div>
 
