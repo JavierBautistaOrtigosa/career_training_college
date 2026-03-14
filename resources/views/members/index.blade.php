@@ -3,43 +3,43 @@
 @section('content')
 <div class="container mt-4">
 
-      <div class="card main-card rounded-3">
-            <div class="card-body p-4">
+      {{-- PAGE HEADER --}}
+      <h1 class="page-header fw-bold heading-tight">Members</h1>
 
-                  {{-- HEADER --}}
-                  <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 class="fw-bold heading-tight mb-0">Members</h2>
-                        <div class="d-flex gap-2">
-                              <a href="{{ route('members.cards') }}" class="btn btn-outline-secondary">
-                                    Card View
-                              </a>
+      {{-- MODULE HEADER --}}
+      <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="fw-bold heading-tight mb-0">Members</h2>
 
-                              @if (session('role') === 'admin')
-                              <a href="{{ route('members.create') }}" class="btn btn-outline-success">
-                                    + Add New Member
-                              </a>
-                              @endif
-                        </div>
-                  </div>
+            <div class="action-buttons">
+                  <a href="{{ route('members.cards') }}" class="btn btn-outline-secondary">Card View</a>
 
-                  {{-- FILTERS --}}
-                  <form method="GET" action="{{ route('members.index') }}" class="row g-3 mb-4">
+                  @if (session('role') === 'admin')
+                  <a href="{{ route('members.create') }}" class="btn btn-green">+ Add New Member</a>
+                  @endif
+            </div>
+      </div>
 
-                        <div class="col-md-4">
+      {{-- FILTER BAR (wrapped in its own card) --}}
+      <div class="card-premium card-hover rounded-3 mb-4">
+            <div class="card-body p-1 p-tight">
+
+                  <form method="GET" action="{{ route('members.index') }}" class="row g-2">
+
+                        <div class="col-md-3">
                               <label class="form-label fw-semibold">Search Name</label>
                               <input type="text" name="search" class="form-control"
                                     placeholder="Search first or last name..."
                                     value="{{ request('search') }}">
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                               <label class="form-label fw-semibold">Email</label>
                               <input type="text" name="email" class="form-control"
                                     placeholder="Search email..."
                                     value="{{ request('email') }}">
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                               <label class="form-label fw-semibold">Sort By</label>
                               <select name="sort" class="form-select">
                                     <option value="">Default (ID Asc)</option>
@@ -50,24 +50,42 @@
                               </select>
                         </div>
 
-                        <div class="col-12 d-flex justify-content-end gap-2">
-                              <a href="{{ route('members.index') }}" class="btn btn-outline-secondary btn-sm">Reset</a>
-                              <button class="btn btn-primary btn-sm">Apply</button>
+                        {{-- BUTTONS INLINE WITH FILTERS --}}
+                        <div class="col-md-3 d-flex align-items-end justify-content-end gap-2">
+
+                              <a href="{{ route('members.index') }}"
+                                    class="btn btn-outline-secondary w-100 form-control text-center">
+                                    Reset
+                              </a>
+
+                              <button class="btn btn-primary w-100 form-control text-center">
+                                    Apply
+                              </button>
+
                         </div>
 
                   </form>
+            </div>
+      </div>
+
+
+
+      {{-- CARD BODY (table only) --}}
+      <div class="card-premium card-hover rounded-3">
+            <div class="card-body p-1 p-tight">
 
                   {{-- TABLE --}}
                   <div class="table-responsive">
-                        <table class="table table-hover align-middle">
-                              <thead class="table-light">
+                        <table class="table table-hover table-sm table-borderless">
+                              <!-- <table class="table table-hover table-sm align-middle"> -->
+                              <thead class="border-bottom">
                                     <tr>
-                                          <th>ID</th>
-                                          <th>Name</th>
-                                          <th>Email</th>
-                                          <th>Age</th>
+                                          <th class="pb-2">ID</th>
+                                          <th class="pb-2">Name</th>
+                                          <th class="pb-2">Email</th>
+                                          <th class="pb-2">Age</th>
                                           @if (session('role') === 'admin')
-                                          <th>Actions</th>
+                                          <th class="pb-2 text-end">Actions</th>
                                           @endif
                                     </tr>
                               </thead>
@@ -80,7 +98,7 @@
                                           <td>{{ $member->age }}</td>
 
                                           @if (session('role') === 'admin')
-                                          <td>
+                                          <td class="text-end">
                                                 <a href="{{ route('members.edit', $member->id) }}" class="btn btn-outline-primary btn-sm">Edit</a>
 
                                                 <form action="{{ route('members.destroy', $member->id) }}" method="POST" class="d-inline">
@@ -94,11 +112,12 @@
                                     </tr>
                                     @endforeach
                               </tbody>
+
                         </table>
                   </div>
 
                   {{-- PAGINATION --}}
-                  <div class="mt-4">
+                  <div class="mt-2 pt-4 border-top pb-0 mb-0">
                         {{ $members->links() }}
                   </div>
 

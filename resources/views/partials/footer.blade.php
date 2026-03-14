@@ -1,5 +1,5 @@
 <footer class="bg-dark text-light py-3 mt-5">
-      <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <div class="container action-buttons flex-column flex-md-row justify-content-between align-items-center">
 
             <div class="mb-2 mb-md-0">
                   <span class="fw-semibold">Career Training College</span><br>

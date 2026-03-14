@@ -27,13 +27,13 @@
 
 {{-- ⭐ PURE BOOTSTRAP STICKY FOOTER --}}
 
-<body class="d-flex flex-column min-vh-100 bg-premium-dark">
+<body class="action-buttons flex-column min-vh-100 bg-premium-dark">
 
       {{-- NAVBAR --}}
       <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
             <div class="container">
 
-                  <a class="navbar-brand fw-bold" href="{{ route('members.index') }}">
+                  <a class="navbar-brand fw-semibold" href="{{ route('members.index') }}">
                         CTC
                   </a>
 

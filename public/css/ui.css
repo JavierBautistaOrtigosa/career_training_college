@@ -2,6 +2,16 @@
    UI UTILITIES — clean, safe, Bootstrap-friendly
 --------------------------------------------------------- */
 
+/* Premium card */
+.card-premium {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 0.75rem;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.06),
+        0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
 /* Card hover effect */
 .card-hover {
     transition: 0.2s ease;
@@ -11,37 +21,113 @@
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
+/* Card padding compact */
+.card-compact {
+    padding: 1rem !important;
+}
+
+/* Heading rhythm */
+.heading-tight {
+    letter-spacing: -0.3px;
+    margin-bottom: 0.5rem;
+}
+
+/* Page header spacing */
+.page-header {
+    margin-bottom: 1.5rem;
+}
+
+/* Paragraph rhythm */
+.p-tight p {
+    margin-bottom: 0.4rem;
+}
+
 /* Tight action button spacing */
 .action-buttons {
     display: flex;
     gap: 0.4rem;
 }
 
-/* Heading rhythm */
-.heading-tight {
-    letter-spacing: -0.3px;
-}
-
-/* Tight paragraph rhythm */
-.p-tight p {
-    margin-bottom: 0.4rem;
-}
-
 /* Premium BG tone */
 .bg-premium-dark {
     background-color: #e9ecef;
-    /* background-color: #2f2f2f; */
-    /* background-color: #ced0d3; */
 }
 
-/* Elevation 1 */
-/* .main-card {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-    border-radius: 0.75rem;
-} */
-
-/* Elevation 2 */
+/* Elevation utility */
 .main-card {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     border-radius: 0.75rem;
+}
+
+/* Global green button */
+.btn-green {
+    background-color: #4caf50;
+    border: none;
+    color: #fff;
+}
+.btn-green:hover {
+    background-color: #449a48;
+}
+
+/* Button sizing */
+.btn {
+    padding: 0.45rem 1rem;
+}
+.btn-sm {
+    padding: 0.3rem 0.75rem;
+}
+
+/* Match button height to form inputs/selects */
+.btn-input {
+    padding: 0.375rem 0.75rem; /* same as form-select */
+    font-size: 1rem; /* same as form-select */
+    line-height: 1.5; /* same as form-select */
+    border-radius: 0.375rem; /* same as form-select */
+}
+
+/* Form spacing */
+.form-label {
+    margin-bottom: 0.3rem;
+}
+.form-control,
+.form-select {
+    padding: 0.55rem 0.75rem;
+}
+
+/* Table spacing */
+.table td,
+.table th {
+    vertical-align: middle; /* keeps text centered */
+}
+
+/* Force cards to stretch + pin actions to bottom */
+.card-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-flex .card-body {
+    flex: 1; /* pushes actions to bottom */
+    display: flex;
+    flex-direction: column;
+}
+
+.card-actions-bottom {
+    margin-top: auto; /* pins to bottom */
+}
+
+/* Fix overflowing text */
+.card-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-flex .card-body {
+    flex: 1; /* pushes actions to bottom */
+    display: flex;
+    flex-direction: column;
+}
+
+.card-actions-bottom {
+    margin-top: auto; /* pins to bottom */
 }

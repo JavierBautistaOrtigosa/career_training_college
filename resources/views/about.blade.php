@@ -2,9 +2,9 @@
 
 @section('content')
 
-<h1 class="mb-4 fw-bold">About Career Training College</h1>
+<h1 class="page-header fw-bold heading-tight">About Career Training College</h1>
 
-<div class="card shadow-sm rounded-3 mb-4">
+<div class="card-premium card-hover rounded-3 mb-4">
       <div class="card-body p-4">
 
             <p class="mb-3">

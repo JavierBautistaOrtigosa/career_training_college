@@ -12,7 +12,7 @@
 
 <body class="login-page">
 
-      <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+      <div class="container action-buttons justify-content-center align-items-center" style="min-height: 100vh;">
 
             <div class="login-card" style="width: 420px;">
 
@@ -21,7 +21,7 @@
                         <img src="/images/ctc_logo_v1.svg" alt="CTC Logo" class="login-logo">
                   </div>
 
-                  <h2 class="fw-bold mb-4 text-center">Login</h2>
+                  <h2 class="fw-semibold mb-4 text-center">Login</h2>
 
                   @if(session('success'))
                   <div class="alert alert-success">{{ session('success') }}</div>

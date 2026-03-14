@@ -3,26 +3,28 @@
 @section('content')
 <div class="container mt-4">
 
-      <div class="card main-card rounded-3">
-            <div class="card-body p-4">
+      {{-- PAGE HEADER --}}
+      <h1 class="page-header fw-bold heading-tight">Events</h1>
+
+      <div class="card-premium card-hover rounded-3">
+            <div class="card-body p-4 p-tight">
 
                   {{-- HEADER --}}
                   <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2 class="fw-bold heading-tight mb-0">Events</h2>
 
-                        <div class="d-flex gap-2">
+                        <div class="action-buttons">
                               <a href="{{ route('events.cards') }}" class="btn btn-outline-secondary">
                                     Card View
                               </a>
 
                               @if (session('role') === 'admin')
-                              <a href="{{ route('events.create') }}" class="btn btn-outline-success">
+                              <a href="{{ route('events.create') }}" class="btn btn-green">
                                     + Add New Event
                               </a>
                               @endif
                         </div>
                   </div>
-
 
                   {{-- FILTERS --}}
                   <form method="GET" action="{{ route('events.index') }}" class="row g-3 mb-4">
@@ -65,13 +67,12 @@
                               </select>
                         </div>
 
-                        <div class="col-12 d-flex justify-content-end gap-2">
+                        <div class="col-12 d-flex justify-content-end action-buttons">
                               <a href="{{ route('events.index') }}" class="btn btn-outline-secondary btn-sm">Reset</a>
                               <button class="btn btn-primary btn-sm">Apply</button>
                         </div>
 
                   </form>
-
 
                   {{-- TABLE --}}
                   <div class="table-responsive">
@@ -98,7 +99,7 @@
                                           <td>{{ $event->category }}</td>
 
                                           @if (session('role') === 'admin')
-                                          <td>
+                                          <td class="action-buttons">
                                                 <a href="{{ route('events.edit', $event->id) }}" class="btn btn-outline-primary btn-sm">Edit</a>
 
                                                 <form action="{{ route('events.destroy', $event->id) }}" method="POST" class="d-inline">

@@ -3,26 +3,23 @@
 @section('content')
 <div class="container mt-4">
 
-      <div class="card main-card rounded-3">
-            <div class="card-body p-4">
+      <h1 class="page-header fw-bold heading-tight">Members (Card View)</h1>
+
+      <div class="card-premium card-hover rounded-3">
+            <div class="card-body p-4 p-tight">
 
                   {{-- HEADER --}}
                   <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 class="fw-bold heading-tight mb-0">Members (Card View)</h2>
+                        <h2 class="fw-semibold heading-tight mb-0">Members (Card View)</h2>
 
-                        <div class="d-flex gap-2">
-                              <a href="{{ route('members.index') }}" class="btn btn-outline-secondary">
-                                    Table View
-                              </a>
+                        <div class="action-buttons">
+                              <a href="{{ route('members.index') }}" class="btn btn-outline-secondary">Table View</a>
 
                               @if (session('role') === 'admin')
-                              <a href="{{ route('members.create') }}" class="btn btn-outline-success">
-                                    + Add New Member
-                              </a>
+                              <a href="{{ route('members.create') }}" class="btn btn-green">+ Add New Member</a>
                               @endif
                         </div>
                   </div>
-
 
                   {{-- FILTERS --}}
                   <form method="GET" action="{{ route('members.cards') }}" class="row g-3 mb-4">
@@ -52,9 +49,9 @@
                               </select>
                         </div>
 
-                        <div class="col-12 d-flex justify-content-end gap-2">
+                        <div class="col-12 d-flex justify-content-end action-buttons">
                               <a href="{{ route('members.cards') }}" class="btn btn-outline-secondary btn-sm">Reset</a>
-                              <button class="btn btn-primary btn-sm">Apply</button>
+                              <button class="btn btn-green btn-sm">Apply</button>
                         </div>
 
                   </form>
@@ -63,18 +60,19 @@
                   <div class="row g-3">
                         @foreach($members as $member)
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                              <div class="card card-hover shadow-sm rounded-3 h-100 p-tight">
+                              <div class="card card-hover h-100 d-flex flex-column">
 
-                                    <div class="card-body p-3">
-                                          <h5 class="fw-bold mb-2 heading-tight">
+                                    <div class="card-body p-3 p-tight d-flex flex-column">
+
+                                          <h5 class="fw-semibold mb-2 heading-tight text-truncate-2">
                                                 {{ $member->first_name }} {{ $member->last_name }}
                                           </h5>
 
-                                          <p><strong>Email:</strong> {{ $member->email }}</p>
+                                          <p class="text-truncate-2"><strong>Email:</strong> {{ $member->email }}</p>
                                           <p><strong>Age:</strong> {{ $member->age }}</p>
 
                                           @if (session('role') === 'admin')
-                                          <div class="action-buttons mt-3">
+                                          <div class="action-buttons mt-auto pt-2">
                                                 <a href="{{ route('members.edit', $member->id) }}"
                                                       class="btn btn-outline-primary btn-sm w-50">Edit</a>
 
@@ -91,6 +89,7 @@
                                     </div>
                               </div>
                         </div>
+
                         @endforeach
                   </div>
 
@@ -98,7 +97,6 @@
                   <div class="mt-4">
                         {{ $members->links() }}
                   </div>
-
             </div>
       </div>
 

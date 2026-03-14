@@ -3,26 +3,23 @@
 @section('content')
 <div class="container mt-4">
 
-      <div class="card main-card rounded-3">
-            <div class="card-body p-4">
+      <h1 class="page-header fw-bold heading-tight">Events (Card View)</h1>
+
+      <div class="card-premium card-hover rounded-3">
+            <div class="card-body p-4 p-tight">
 
                   {{-- HEADER --}}
                   <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 class="fw-bold heading-tight mb-0">Events (Card View)</h2>
+                        <h2 class="fw-semibold heading-tight mb-0">Events (Card View)</h2>
 
-                        <div class="d-flex gap-2">
-                              <a href="{{ route('events.index') }}" class="btn btn-outline-secondary">
-                                    Table View
-                              </a>
+                        <div class="action-buttons">
+                              <a href="{{ route('events.index') }}" class="btn btn-outline-secondary">Table View</a>
 
                               @if (session('role') === 'admin')
-                              <a href="{{ route('events.create') }}" class="btn btn-outline-success">
-                                    + Add New Event
-                              </a>
+                              <a href="{{ route('events.create') }}" class="btn btn-green">+ Add New Event</a>
                               @endif
                         </div>
                   </div>
-
 
                   {{-- FILTERS --}}
                   <form method="GET" action="{{ route('events.cards') }}" class="row g-3 mb-4">
@@ -65,54 +62,49 @@
                               </select>
                         </div>
 
-                        <div class="col-12 d-flex justify-content-end gap-2">
+                        <div class="col-12 d-flex justify-content-end action-buttons">
                               <a href="{{ route('events.cards') }}" class="btn btn-outline-secondary btn-sm">Reset</a>
-                              <button class="btn btn-primary btn-sm">Apply</button>
+                              <button class="btn btn-green btn-sm">Apply</button>
                         </div>
 
                   </form>
-
 
                   {{-- CARD GRID --}}
                   <div class="row g-3">
                         @foreach($events as $event)
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                              <div class="card card-hover shadow-sm rounded-3 h-100 p-tight">
+                              <div class="card card-hover h-100 d-flex flex-column">
 
+                                    {{-- IMAGE --}}
                                     @if($event->image_path)
                                     <img src="{{ asset('storage/' . $event->image_path) }}"
                                           class="card-img-top object-fit-cover"
                                           style="height: 180px;"
                                           alt="Event Image">
-
                                     @else
-                                    <!-- No image placeholder - Option 1 -->
                                     <img src="{{ asset('images/event_placeholder_1.jpg') }}"
                                           class="card-img-top object-fit-cover"
                                           style="height: 180px;"
                                           alt="Placeholder Image">
-                                    <!-- No image Bootstrap placeholder - Option 2 -->
-                                    <!-- <div class="d-flex align-items-center justify-content-center bg-light rounded-top"
-                                          style="height: 180px;">
-                                          <svg width="48" height="48" fill="#adb5bd" viewBox="0 0 16 16">
-                                                <path d="M14 2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM2 1h12a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H2a3 3 0 0 1-3-3V4a3 3 0 0 1 3-3z" />
-                                                <path d="M10.648 8.646a.5.5 0 0 1 .704.704l-3 3a.5.5 0 0 1-.704 0l-1.5-1.5a.5.5 0 1 1 .704-.704L8 11.293l2.648-2.647z" />
-                                                <circle cx="5" cy="6" r="1.5" />
-                                          </svg>
-                                    </div> -->
-
-
                                     @endif
 
-                                    <div class="card-body p-3">
-                                          <h5 class="fw-bold mb-2 heading-tight">{{ $event->title }}</h5>
+                                    {{-- BODY --}}
+                                    <div class="card-body p-3 p-tight d-flex flex-column">
+
+                                          <h5 class="fw-semibold mb-2 heading-tight text-truncate-2">
+                                                {{ $event->title }}
+                                          </h5>
 
                                           <p><strong>Date:</strong> {{ \Carbon\Carbon::parse($event->date_time)->format('M j, Y – g:i A') }}</p>
+
+                                          <p class="text-truncate-3">
+                                                <strong>Description:</strong> {{ $event->description }}
+                                          </p>
+
                                           <p><strong>Location:</strong> {{ $event->location }}</p>
-                                          <p><strong>Description:</strong> {{ $event->description }}</p>
 
                                           @if (session('role') === 'admin')
-                                          <div class="action-buttons mt-3">
+                                          <div class="action-buttons mt-auto pt-2">
                                                 <a href="{{ route('events.edit', $event->id) }}"
                                                       class="btn btn-outline-primary btn-sm w-50">Edit</a>
 
@@ -129,6 +121,8 @@
                                     </div>
                               </div>
                         </div>
+
+
                         @endforeach
                   </div>
 
