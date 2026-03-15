@@ -8,30 +8,22 @@
 
             {{-- CARD HEADER + TOP TOOLBAR (ONE ROW) --}}
             <div class="d-flex flex-lg-row flex-column justify-content-between align-items-lg-center mb-3">
-
                   <h4 class="fw-semibold mb-2 mb-lg-0">Members list</h4>
-
                   <div class="d-flex flex-wrap gap-2 mt-2 mt-lg-0">
-
                         <button type="button" id="toggleFilters"
                               class="btn btn-outline-secondary rounded-3">
                               Filters
                         </button>
-
                         <a href="{{ route('members.cards') }}" class="btn btn-outline-secondary rounded-3">
                               Card View
                         </a>
-
                         @if (session('role') === 'admin')
                         <a href="{{ route('members.create') }}" class="btn btn-green rounded-3">
                               + Add New Member
                         </a>
                         @endif
-
                   </div>
-
             </div>
-
 
             {{-- START FORM --}}
             <form method="GET" action="{{ route('members.index') }}">
@@ -39,21 +31,18 @@
                   {{-- FILTERS ROW --}}
                   <!-- <div id="filtersContainer" class="row g-2 mb-3 d-none"> -->
                   <div id="filtersContainer" class="row g-2 mb-3">
-
                         <div class="col-md-4">
                               <label class="form-label fw-semibold">Search Name</label>
                               <input type="text" name="search" class="form-control"
                                     placeholder="Search first or last name..."
                                     value="{{ request('search') }}">
                         </div>
-
                         <div class="col-md-4">
                               <label class="form-label fw-semibold">Email</label>
                               <input type="text" name="email" class="form-control"
                                     placeholder="Search email..."
                                     value="{{ request('email') }}">
                         </div>
-
                         <div class="col-md-4">
                               <label class="form-label fw-semibold">Sort By</label>
                               <select name="sort" class="form-select">
@@ -72,19 +61,13 @@
                                     <i class="bi bi-arrow-counterclockwise"></i>
                                     Reset
                               </a>
-
                               <button class="btn btn-outline-primary rounded-3 d-inline-flex align-items-center gap-1">
                                     <i class="bi bi-check2"></i>
                                     Apply
                               </button>
                         </div>
-
                   </div>
-
-
-
-
-            </form> {{-- ← THIS MUST BE HERE, INSIDE CARD-BODY --}}
+            </form>
 
 
             {{-- TABLE --}}
@@ -129,7 +112,6 @@
                                                       <i class="bi bi-trash"></i>
                                                 </button>
                                           </form>
-
                                     </td>
                                     @endif
                               </tr>
@@ -144,14 +126,6 @@
                         {{ $members->links() }}
                   </div>
             </div>
-
       </div>
 </div>
-
-</div>
-
-
-
-
-
 @endsection

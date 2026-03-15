@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Illuminate\Support\Facades\Storage;
+
 
 class EventsController extends Controller
 {
@@ -165,8 +167,8 @@ class EventsController extends Controller
             if ($request->hasFile('image')) {
 
                   // Delete old image if it exists
-                  if ($event->image_path && \Storage::disk('public')->exists($event->image_path)) {
-                        \Storage::disk('public')->delete($event->image_path);
+                  if ($event->image_path && Storage::disk('public')->exists($event->image_path)) {
+                        Storage::disk('public')->delete($event->image_path);
                   }
 
                   // Store new image

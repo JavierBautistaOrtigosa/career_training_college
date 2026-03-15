@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container mt-4">
 
@@ -21,26 +20,19 @@
                                     class="btn btn-outline-secondary rounded-3">
                                     Filters
                               </button>
-
                               <a href="{{ route('events.index') }}" class="btn btn-outline-secondary rounded-3">
                                     Table View
                               </a>
-
                               @if (session('role') === 'admin')
                               <a href="{{ route('events.create') }}" class="btn btn-green rounded-3">
                                     + Add New Event
                               </a>
                               @endif
-
                         </div>
-
                   </div>
-
 
                   {{-- FILTERS --}}
                   <form method="GET" action="{{ route('events.cards') }}">
-
-                        <!-- <div id="filtersContainer" class="row g-2 mb-3 d-none"> -->
                         <div id="filtersContainer" class="row g-2 mb-3">
 
                               {{-- SEARCH TITLE --}}
@@ -93,20 +85,13 @@
                                           <i class="bi bi-arrow-counterclockwise"></i>
                                           Reset
                                     </a>
-
                                     <button class="btn btn-outline-primary rounded-3 d-inline-flex align-items-center gap-1">
                                           <i class="bi bi-check2"></i>
                                           Apply
                                     </button>
-
                               </div>
-
                         </div>
-
                   </form>
-
-
-
 
                   {{-- CARD GRID --}}
                   <div class="row g-3">
@@ -129,25 +114,18 @@
 
                                     {{-- BODY --}}
                                     <div class="card-body p-3 d-flex flex-column">
-
                                           <h5 class="fw-semibold mb-2 heading-tight text-truncate-2">
                                                 {{ $event->title }}
                                           </h5>
-
                                           <p><strong>Date:</strong> {{ \Carbon\Carbon::parse($event->date_time)->format('M j, Y – g:i A') }}</p>
-
                                           <p class="text-truncate-3">
                                                 <strong>Description:</strong> {{ $event->description }}
                                           </p>
-
                                           <p><strong>Location:</strong> {{ $event->location }}</p>
-
                                           @if (session('role') === 'admin')
                                           <div class="action-buttons mt-auto pt-2 d-flex gap-2">
-
                                                 <a href="{{ route('events.edit', $event->id) }}"
                                                       class="btn btn-outline-primary btn-sm w-50">Edit</a>
-
                                                 <form action="{{ route('events.destroy', $event->id) }}"
                                                       method="POST" class="w-50">
                                                       @csrf
@@ -156,10 +134,8 @@
                                                             class="btn btn-outline-danger btn-sm w-100"
                                                             onclick="return confirm('Are you sure?')">Delete</button>
                                                 </form>
-
                                           </div>
                                           @endif
-
                                     </div>
                               </div>
                         </div>
@@ -172,12 +148,7 @@
                               {{ $events->links() }}
                         </div>
                   </div>
-
             </div>
       </div>
-
 </div>
-
-
-
 @endsection

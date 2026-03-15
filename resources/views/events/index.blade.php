@@ -8,7 +8,6 @@
             <div class="card-body p-3">
 
                   {{-- CARD HEADER + TOP TOOLBAR (ONE ROW) --}}
-                  <!-- <div class="d-flex justify-content-between align-items-center mb-3"> -->
                   <div class="d-flex flex-lg-row flex-column justify-content-between align-items-lg-center mb-3">
 
                         {{-- LEFT: TITLE --}}
@@ -32,9 +31,7 @@
                                     + Add New Event
                               </a>
                               @endif
-
                         </div>
-
                   </div>
 
 
@@ -42,16 +39,13 @@
                   <form method="GET" action="{{ route('events.index') }}">
 
                         {{-- FILTERS ROW (INCLUDING RESET + APPLY) --}}
-                        <!-- <div id="filtersContainer" class="row g-2 mb-3 d-none"> -->
                         <div id="filtersContainer" class="row g-2 mb-3">
-
                               <div class="col-md-3">
                                     <label class="form-label fw-semibold">Search Title</label>
                                     <input type="text" name="search" class="form-control"
                                           placeholder="Search event title..."
                                           value="{{ request('search') }}">
                               </div>
-
                               <div class="col-md-3">
                                     <label class="form-label fw-semibold">Category</label>
                                     <select name="category" class="form-select">
@@ -64,14 +58,12 @@
                                           @endforeach
                                     </select>
                               </div>
-
                               <div class="col-md-3">
                                     <label class="form-label fw-semibold">Location</label>
                                     <input type="text" name="location" class="form-control"
                                           placeholder="Search location..."
                                           value="{{ request('location') }}">
                               </div>
-
                               <div class="col-md-3">
                                     <label class="form-label fw-semibold">Sort By</label>
                                     <select name="sort" class="form-select">
@@ -85,26 +77,17 @@
 
                               {{-- RESET + APPLY --}}
                               <div class="col-12 text-end">
-
                                     <a href="{{ route('events.index') }}"
                                           class="btn btn-outline-secondary rounded-3 d-inline-flex align-items-center gap-1">
                                           <i class="bi bi-arrow-counterclockwise"></i>
                                           Reset
                                     </a>
-
                                     <button class="btn btn-outline-primary rounded-3 d-inline-flex align-items-center gap-1">
                                           <i class="bi bi-check2"></i>
                                           Apply
                                     </button>
-
                               </div>
-
-
-
-
-
                         </div>
-
                   </form>
                   {{-- END FORM --}}
 
@@ -131,28 +114,23 @@
                                           <td>{{ \Carbon\Carbon::parse($event->date_time)->format('M j, Y – g:i A') }}</td>
                                           <td>{{ $event->location }}</td>
                                           <td>{{ $event->category }}</td>
-
                                           @if (session('role') === 'admin')
                                           <td class="text-end">
-
                                                 {{-- EDIT ICON --}}
                                                 <a href="{{ route('events.edit', $event->id) }}"
                                                       class="action-icon icon-edit me-2">
                                                       <i class="bi bi-pencil-square"></i>
                                                 </a>
-
                                                 {{-- DELETE ICON --}}
                                                 <form action="{{ route('events.destroy', $event->id) }}"
                                                       method="POST" class="d-inline">
                                                       @csrf
                                                       @method('DELETE')
-
                                                       <button class="action-icon icon-delete"
                                                             onclick="return confirm('Are you sure?')">
                                                             <i class="bi bi-trash"></i>
                                                       </button>
                                                 </form>
-
                                           </td>
                                           @endif
                                     </tr>
@@ -167,11 +145,7 @@
                               {{ $events->links() }}
                         </div>
                   </div>
-
             </div>
       </div>
-
 </div>
-
-
 @endsection
