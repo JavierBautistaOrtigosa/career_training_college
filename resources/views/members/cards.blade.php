@@ -39,7 +39,8 @@
                   {{-- FILTERS --}}
                   <form method="GET" action="{{ route('members.cards') }}">
 
-                        <div id="filtersContainer" class="row g-2 mb-3 d-none">
+                        <!-- <div id="filtersContainer" class="row g-2 mb-3 d-none"> -->
+                        <div id="filtersContainer" class="row g-2 mb-3">
 
                               {{-- SEARCH NAME --}}
                               <div class="col-md-4">
@@ -141,12 +142,6 @@
 
 </div>
 
-{{-- FILTER TOGGLE SCRIPT --}}
-<script>
-      document.getElementById('toggleFilters').addEventListener('click', function() {
-            const filters = document.getElementById('filtersContainer');
-            filters.classList.toggle('d-none');
-      });
-</script>
+
 
 @endsection

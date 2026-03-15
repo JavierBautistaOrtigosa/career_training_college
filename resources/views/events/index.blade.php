@@ -40,7 +40,8 @@
                   <form method="GET" action="{{ route('events.index') }}">
 
                         {{-- FILTERS ROW (INCLUDING RESET + APPLY) --}}
-                        <div id="filtersContainer" class="row g-2 mb-3 d-none">
+                        <!-- <div id="filtersContainer" class="row g-2 mb-3 d-none"> -->
+                        <div id="filtersContainer" class="row g-2 mb-3">
 
                               <div class="col-md-3">
                                     <label class="form-label fw-semibold">Search Title</label>
@@ -170,12 +171,5 @@
 
 </div>
 
-{{-- FILTER TOGGLE SCRIPT --}}
-<script>
-      document.getElementById('toggleFilters').addEventListener('click', function() {
-            const filters = document.getElementById('filtersContainer');
-            filters.classList.toggle('d-none');
-      });
-</script>
 
 @endsection

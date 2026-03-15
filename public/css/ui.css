@@ -190,9 +190,9 @@
 
 table thead th {
     text-transform: uppercase;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 650;
-    color: #495057ea !important;
+    color: #495057a9 !important;
     letter-spacing: 0.5px;
 }
 /* Base icon style */
@@ -225,4 +225,12 @@ table thead th {
 .icon-delete:hover {
     color: #dc3545; /* soft red on hover */
     opacity: 0.8;
+}
+
+#filtersContainer {
+    background: #f8f9fa3d;
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid #6c757d1c;
+    box-shadow: 0 0.2px 2px rgba(0, 0, 0, 0.04);
 }
