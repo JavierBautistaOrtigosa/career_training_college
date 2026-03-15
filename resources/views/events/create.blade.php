@@ -4,10 +4,13 @@
 
 <div class="container mt-4">
 
-      <h1 class="page-header fw-bold heading-tight">Add New Event</h1>
 
       <div class="card-premium card-hover rounded-3 mb-4">
+
+
             <div class="card-body p-4">
+                  {{-- LEFT: TITLE --}}
+                  <h4 class="fw-semibold mb-4">Add event</h4>
 
                   <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf

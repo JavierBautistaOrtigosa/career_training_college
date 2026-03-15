@@ -8,13 +8,14 @@
             <div class="card-body p-3">
 
                   {{-- CARD HEADER + TOP TOOLBAR (ONE ROW) --}}
-                  <div class="d-flex justify-content-between align-items-center mb-3">
+                  <!-- <div class="d-flex justify-content-between align-items-center mb-3"> -->
+                  <div class="d-flex flex-lg-row flex-column justify-content-between align-items-lg-center mb-3">
 
                         {{-- LEFT: TITLE --}}
-                        <h4 class="fw-semibold mb-0">Events list</h4>
+                        <h4 class="fw-semibold mb-2 mb-lg-0">Events list</h4>
 
                         {{-- RIGHT: BUTTONS --}}
-                        <div class="d-flex gap-2">
+                        <div class="d-flex flex-wrap gap-2 mt-2 mt-lg-0">
 
                               {{-- FILTERS TOGGLE BUTTON --}}
                               <button type="button" id="toggleFilters"
@@ -35,6 +36,7 @@
                         </div>
 
                   </div>
+
 
                   {{-- START FORM --}}
                   <form method="GET" action="{{ route('events.index') }}">

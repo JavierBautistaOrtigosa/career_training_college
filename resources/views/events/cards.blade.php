@@ -8,13 +8,13 @@
             <div class="card-body p-3">
 
                   {{-- HEADER + TOP TOOLBAR --}}
-                  <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="d-flex flex-lg-row flex-column justify-content-between align-items-lg-center mb-3">
 
                         {{-- LEFT: TITLE --}}
-                        <h4 class="fw-semibold mb-0">Events (Card View)</h4>
+                        <h4 class="fw-semibold mb-2 mb-lg-0">Events</h4>
 
                         {{-- RIGHT: BUTTONS --}}
-                        <div class="d-flex gap-2">
+                        <div class="d-flex flex-wrap gap-2 mt-2 mt-lg-0">
 
                               {{-- FILTERS TOGGLE --}}
                               <button type="button" id="toggleFilters"
@@ -35,6 +35,7 @@
                         </div>
 
                   </div>
+
 
                   {{-- FILTERS --}}
                   <form method="GET" action="{{ route('events.cards') }}">
@@ -110,7 +111,7 @@
                   {{-- CARD GRID --}}
                   <div class="row g-3">
                         @foreach($events as $event)
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-3">
                               <div class="card card-hover h-100 d-flex flex-column">
 
                                     {{-- IMAGE --}}
@@ -166,7 +167,7 @@
                   </div>
 
                   {{-- PAGINATION --}}
-                  <div class="mt-0 pt-3 border-top pb-0 mb-0 d-flex justify-content-center">
+                  <div class="mt-4 pt-3 border-top pb-0 mb-0 d-flex justify-content-center">
                         <div class="my-paginator">
                               {{ $events->links() }}
                         </div>

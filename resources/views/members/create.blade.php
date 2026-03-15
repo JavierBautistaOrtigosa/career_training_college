@@ -4,7 +4,7 @@
 
 <div class="container mt-4">
 
-      <h1 class="page-header fw-bold heading-tight">Add New Member</h1>
+
 
       {{-- SUCCESS MESSAGE --}}
       @if(session('success'))
@@ -28,6 +28,8 @@
 
       <div class="card-premium card-hover rounded-3 mb-4">
             <div class="card-body p-4">
+                  {{-- LEFT: TITLE --}}
+                  <h4 class="fw-semibold mb-4">Add member</h4>
 
                   <form action="{{ route('members.store') }}" method="POST">
                         @csrf
