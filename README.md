@@ -1,59 +1,257 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+### Project Introduction
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Career Training College**
+_Event & Member Management System_
 
-## About Laravel
+The system allows authenticated users to view members and events, while admin users can create, edit, and delete records. The project includes table and card views, filtering, sorting and pagination.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Project Purpose
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The main purpose of this project was to design and build a fully functional dynamic website that demonstrates:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Server-side scripting.
+- Client-side components.
+- A structured database.
+- CRUD operations.
+- MVC architecture.
+- Professional UI design.
+- Web development frameworks.
 
-## Learning Laravel
+### Technologies Used
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- **Backend & Framework:**
+  Laravel (PHP Framework)
+  Routing
+  Controllers
+  Models
+  Migrations
+  Validation
+  MVC structure
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Frontend:**
+  Blade Templates
+  Reusable layouts
+  Dynamic content rendering
+  Bootstrap 5
+  Responsive design
+  Layout
+  Spacing
+  UI Components
+  Custom CSS
+  Fine tune styling and advanced layout control
 
-## Laravel Sponsors
+- **Database:**
+  MySQL
+  Used to store:
+  Members
+  Events
+  User authentication data.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### UI & Design Decisions
 
-### Premium Partners
+- **Key Design Features:**
+  Bootstrap grid system for layout.
+  Flexbox for alignment and spacing.
+  Consistent typography and spacing rhythm.
+  Reusable header and button components.
+  Card view layout for visual presentation.
+  Table view layout for structured data.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Database Structure
 
-## Contributing
+- **The database consists of three main tables:**
+  Users - Used for authentication.
+  Members - Stores members information.
+  Events - Stores event information.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- All tables we created using Laravel migrations, ensuring the structure is version‑controlled and reproducible.
 
-## Code of Conduct
+### CRUD
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Essentially, CRUD operations are handled through Laravel controllers and models, ensuring clean separation of logic. Both the **Members** and **Events** modules support full CRUD operations.
 
-## Security Vulnerabilities
+- **Create**
+  Used to add new Members or Events into the system. Admin users access a form, submit validated data, and Laravel stores the new record in the database.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Read**
+  Displays existing records to the user. Both Members and Events can be viewed in table or card layouts, with support for search, filtering, sorting, and pagination.
 
-## License
+- **Update**
+  Allows admin users to edit existing records. Laravel loads the current data into an edit form, validates the changes, and updates the database.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Delete**
+  Admin users can remove Members or Events from the system.
+
+### Authentication without middleware
+
+This project intentionally avoids Laravel’s built‑in authentication middleware to match the class‑demo approach taught in class. Instead of using `auth` middleware or guards, the application uses a **manual session‑based login system**.
+
+Every protected controller method begins with a check like:
+
+```php
+if (!session('isLoggedIn')) {
+    return redirect('/login');
+}
+```
+
+**This ensures:**
+
+- Only logged‑in users can access Members and Events pages
+- Admin‑only actions (Create, Edit, Delete) are protected using an additional role check
+- No Laravel middleware, guards, or policies are used
+- The authentication flow remains simple and fully aligned with the class demonstration
+
+This manual approach keeps the logic easy to follow and makes the authentication process transparent for learning purposes.
+
+### READ - Members List (index method description)
+
+- **User Action**:
+  The user navigates to the Members page. The browser sends: `GET /members`
+- **Lifecycle**
+    1. Route matches.
+    2. Manual authentication check. Every protected controller method begins with this check.
+    3. Controller fetches all members using Eloquent ORM.
+    4. Controller returns the Blade view, passing the members collection.
+    5. Blade loops through the members and renders the table rows dynamically.
+
+```php
+// 1. Route matches.
+Route::get('/members', [MembersController::class, 'index']);
+```
+
+```php
+// 2. Manual authentication check.
+if (!session('isLoggedIn')) {
+    return redirect('/login');
+}
+```
+
+```php
+// 3. Fetch all members using Eloquent ORM.
+$members = Member::all();
+```
+
+```php
+// 4. Return Blade view with data.
+return view('members.index', ['members' => $members]);
+```
+
+```php
+// 5. Blade loops through the $members collection.
+// (Inside members/index.blade.php)
+@foreach ($members as $member)
+    <tr>
+        <td>{{ $member->first_name }}</td>
+        <td>{{ $member->last_name }}</td>
+        <td>{{ $member->email }}</td>
+        <!-- etc... -->
+    </tr>
+@endforeach
+```
+
+### CREATE - Store New Member (store method description)
+
+- **User Action**:
+  The user fills out the add new member form.
+  The user clicks on "Save Member": `POST /members`
+- **Lifecycle**
+    1.  Route matches.
+    2.  Manual authentication check. Every protected controller method begins with.
+    3.  Laravel validation runs. If any required field are missing or invalid, Laravel automatically redirects back with error messages.
+    4.  If validation passes a new Member record is created using Eloquent.
+    5.  Redirect After successful creation, the user is redirected back to the Members list.
+        A new member is inserted into the database and immediately appears in the Members list.
+
+```php
+// 1. Route matches.
+ `Route::post('/members', [MembersController::class, 'store']);`
+```
+
+```php
+// 2. Manual authentication check.
+if (!session('isLoggedIn')) {
+	return redirect('/login');
+}
+```
+
+```php
+// 3. Laravel validation runs.
+$request->validate([
+	'first_name' => 'required',
+	'last_name' => 'required',
+	'age' => 'required|integer',
+	'email' => 'required|email',
+	'phone' => 'required',
+	'address' => 'required'
+]);
+```
+
+```php
+// 4. Member record is created using Eloquent.
+Member::create([
+		'first_name' => $request->first_name,
+		'last_name' => $request->last_name,
+		'age' => $request->age,
+		'email' => $request->email,
+		'phone' => $request->phone,
+		'address' => $request->address
+]);
+```
+
+```php
+//  5. Redirect after successful creation.
+	return redirect()->route('members.index');
+```
+
+### How Models Interact With the Database Using Eloquent ORM
+
+Eloquent ORM allows the application to interact with the database using clean, expressive PHP instead of raw SQL. Each model represents a database table, and Eloquent automatically converts model methods into SQL queries behind the scenes.
+
+For example:
+
+- `Member::all()` becomes a `SELECT` query
+- `Member::create()` becomes an `INSERT` query
+- `$member->update()` becomes an `UPDATE` query
+- `$member->delete()` becomes a `DELETE` query
+
+This keeps the code readable, secure, and consistent with Laravel best practices.
+
+```php
+// How Models Interact With the Database Using Eloquent ORM
+
+Member::all();            // → SELECT * FROM members
+Member::create([...]);    // → INSERT INTO members (...)
+$member->update([...]);   // → UPDATE members SET ...
+$member->delete();        // → DELETE FROM members WHERE id = ...
+```
+
+### MVC Architecture
+
+The project follows the MVC (Model–View–Controller) architectural pattern. This structure keeps the application organized, scalable, and easy to maintain by separating responsibilities clearly.
+
+- Models:
+  `Member`
+  `Event`
+  `User`
+
+Each model represents a database table and interacts with the database through **Eloquent ORM**. Eloquent automatically converts model methods into SQL queries, allowing the application to work with clean, readable PHP instead of raw SQL.
+
+- Views (handle **presentation only**, with no business logic):
+  Blade templates for all pages
+  Shared layout file for consistent UI structure
+  Table and Card views for displaying Members and Events
+  Forms for Create and Edit operations
+  Fully responsive using Bootstrap 5
+
+- Controllers (handle the application logic, including):
+  CRUD operations for Members and Events
+  Manual authentication checks (class‑demo style)
+  Form validation using Laravel’s built‑in validator
+  Passing data to Blade views
+
+- Routes
+  All routes are defined in `routes/web.php`
+  Each route maps a URL to a specific controller action
+- Example:
+  `Route::get('/members', [MembersController::class, 'index']);`
+- Routes act as the entry point for all user requests, directing them to the correct controller method
