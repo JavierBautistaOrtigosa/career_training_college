@@ -9,6 +9,7 @@ class Member extends Model
 {
       use HasFactory;
 
+      // Mass-assignable fields for Member model
       protected $fillable = [
             'first_name',
             'last_name',
@@ -19,10 +20,10 @@ class Member extends Model
             'professional_summary',
       ];
 
+      // Accessor: returns "First Last" when using $member->full_name
       public function getFullNameAttribute()
       {
-            // This functions allows the members table to show the following:
-            // {{ $member->full_name }}
+            // Allows Blade usage: {{ $member->full_name }}
             return $this->first_name . ' ' . $this->last_name;
       }
 }

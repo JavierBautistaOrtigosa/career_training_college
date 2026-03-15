@@ -1,19 +1,11 @@
-/* ---------------------------------------------------------
-   LOGIN PAGE — soft green theme
---------------------------------------------------------- */
+/* Login General */
 
 body.login-page {
     background: linear-gradient(135deg, #ecf3efe8 0%, #3cad85 80%);
 }
 
-/* Login card wrapper (width only) */
-/* .login-card {
-    width: 420px;
-} */
+/* Login Card */
 
-/* ---------------------------------------------------------
-   LOGIN CARD — clean, premium, isolated from dashboard UI
---------------------------------------------------------- */
 .login-card {
     width: 420px;
     background: #ffffffab;
@@ -25,12 +17,14 @@ body.login-page {
 }
 
 /* Logo */
+
 .login-logo {
     width: 120px;
     margin-bottom: 1rem;
 }
 
 /* Forgot password link */
+
 .forgot-link {
     font-size: 0.9rem;
     color: #4caf50;
@@ -41,6 +35,6 @@ body.login-page {
 }
 
 .login-logo {
-    width: 200px; /* or 180px, or 200px */
+    width: 200px;
     margin-bottom: 1rem;
 }

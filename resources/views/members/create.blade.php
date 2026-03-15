@@ -4,8 +4,6 @@
 
 <div class="container mt-4">
 
-
-
       {{-- SUCCESS MESSAGE --}}
       @if(session('success'))
       <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -26,14 +24,18 @@
       </div>
       @endif
 
+      {{-- MAIN CARD WRAPPER --}}
       <div class="card-premium card-hover rounded-3 mb-4">
             <div class="card-body p-4">
-                  {{-- LEFT: TITLE --}}
+
+                  {{-- PAGE TITLE --}}
                   <h4 class="fw-semibold mb-4">Add member</h4>
 
+                  {{-- CREATE MEMBER FORM --}}
                   <form action="{{ route('members.store') }}" method="POST">
                         @csrf
 
+                        {{-- FIRST NAME --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">First Name</label>
                               <input
@@ -44,6 +46,7 @@
                                     required>
                         </div>
 
+                        {{-- LAST NAME --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Last Name</label>
                               <input
@@ -54,6 +57,7 @@
                                     required>
                         </div>
 
+                        {{-- AGE --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Age</label>
                               <input
@@ -64,6 +68,7 @@
                                     required>
                         </div>
 
+                        {{-- EMAIL --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Email</label>
                               <input
@@ -74,6 +79,7 @@
                                     required>
                         </div>
 
+                        {{-- PHONE --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Phone</label>
                               <input
@@ -84,6 +90,7 @@
                                     required>
                         </div>
 
+                        {{-- ADDRESS --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Address</label>
                               <input
@@ -94,6 +101,7 @@
                                     required>
                         </div>
 
+                        {{-- PROFESSIONAL SUMMARY --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Professional Summary</label>
                               <textarea
@@ -103,6 +111,7 @@
                                     placeholder="Enter a brief summary (optional)"></textarea>
                         </div>
 
+                        {{-- ACTION BUTTONS --}}
                         <div class="action-buttons justify-content-end gap-2 mt-4">
                               <a href="{{ route('members.index') }}" class="btn btn-outline-secondary">
                                     Cancel

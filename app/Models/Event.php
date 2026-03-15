@@ -9,6 +9,7 @@ class Event extends Model
 {
       use HasFactory;
 
+      // Mass-assignable fields for Event model
       protected $fillable = [
             'title',
             'date_time',

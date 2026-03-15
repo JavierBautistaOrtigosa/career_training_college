@@ -4,15 +4,19 @@
 
 <div class="container mt-4">
 
+      {{-- PAGE HEADER --}}
       <h1 class="page-header fw-bold heading-tight">Edit Event</h1>
 
+      {{-- MAIN CARD WRAPPER --}}
       <div class="card-premium card-hover rounded-3 mb-4">
             <div class="card-body p-4">
 
+                  {{-- EDIT EVENT FORM --}}
                   <form action="{{ route('events.update', $event->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
+                        {{-- EVENT TITLE --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Event Title</label>
                               <input
@@ -23,6 +27,7 @@
                                     required>
                         </div>
 
+                        {{-- DATE & TIME --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Date & Time</label>
                               <input
@@ -33,6 +38,7 @@
                                     required>
                         </div>
 
+                        {{-- LOCATION --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Location</label>
                               <input
@@ -43,6 +49,7 @@
                                     required>
                         </div>
 
+                        {{-- CATEGORY DROPDOWN --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Category</label>
                               <select name="category" class="form-select" required>
@@ -54,6 +61,7 @@
                               </select>
                         </div>
 
+                        {{-- DESCRIPTION --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Description</label>
                               <textarea
@@ -62,7 +70,7 @@
                                     rows="3">{{ $event->description }}</textarea>
                         </div>
 
-                        {{-- IMAGE PREVIEW --}}
+                        {{-- IMAGE PREVIEW (CURRENT IMAGE) --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Current Image</label>
 
@@ -84,6 +92,7 @@
                               <input type="file" name="image" class="form-control" accept="image/*">
                         </div>
 
+                        {{-- ACTION BUTTONS --}}
                         <div class="action-buttons justify-content-end gap-2 mt-4">
                               <a href="{{ route('events.index') }}" class="btn btn-outline-secondary">
                                     Cancel

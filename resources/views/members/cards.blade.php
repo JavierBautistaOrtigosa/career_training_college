@@ -8,71 +8,27 @@
             <div class="card-body p-3">
 
                   {{-- HEADER + TOP TOOLBAR --}}
-                  <!-- <div class="d-flex flex-lg-row flex-column justify-content-between align-items-lg-center mb-3">
+                  <div class="d-flex flex-lg-row flex-column justify-content-between align-items-lg-center mb-3 w-100">
 
                         {{-- LEFT: TITLE --}}
-                        <h4 class="fw-semibold mb-2 mb-lg-0">Members cards</h4>
+                        <h4 class="fw-semibold mb-2 mb-lg-0">Members list</h4>
 
                         {{-- RIGHT: BUTTONS --}}
                         <div class="d-flex flex-wrap gap-2 mt-2 mt-lg-0">
 
+                              {{-- FILTERS TOGGLE --}}
                               <button type="button" id="toggleFilters"
                                     class="btn btn-outline-secondary rounded-3">
                                     Filters
                               </button>
 
+                              {{-- SWITCH TO CARD VIEW --}}
                               <a href="{{ route('members.index') }}" class="btn btn-outline-secondary rounded-3">
                                     Table View
                               </a>
 
-                              @if (session('role') === 'admin')
-                              <a href="{{ route('members.create') }}" class="btn btn-green rounded-3">
-                                    + Add New Member
-                              </a>
-                              @endif
 
-                        </div>
-
-                  </div> -->
-                  <!-- <div class="d-flex flex-lg-row flex-column justify-content-between align-items-lg-center mb-3">
-
-                        <h4 class="fw-semibold mb-2 mb-lg-0">Members list</h4>
-
-                        <div class="d-flex flex-wrap gap-2 mt-2 mt-lg-0">
-
-                              <button type="button" id="toggleFilters"
-                                    class="btn btn-outline-secondary rounded-3">
-                                    Filters
-                              </button>
-
-                              <a href="{{ route('members.cards') }}" class="btn btn-outline-secondary rounded-3">
-                                    Card View
-                              </a>
-
-                              @if (session('role') === 'admin')
-                              <a href="{{ route('members.create') }}" class="btn btn-green rounded-3">
-                                    + Add New Member
-                              </a>
-                              @endif
-
-                        </div>
-
-                  </div> -->
-                  <div class="d-flex flex-lg-row flex-column justify-content-between align-items-lg-center mb-3 w-100">
-
-                        <h4 class="fw-semibold mb-2 mb-lg-0">Members list</h4>
-
-                        <div class="d-flex flex-wrap gap-2 mt-2 mt-lg-0">
-
-                              <button type="button" id="toggleFilters"
-                                    class="btn btn-outline-secondary rounded-3">
-                                    Filters
-                              </button>
-
-                              <a href="{{ route('members.cards') }}" class="btn btn-outline-secondary rounded-3">
-                                    Card View
-                              </a>
-
+                              {{-- ADMIN: ADD NEW MEMBER --}}
                               @if (session('role') === 'admin')
                               <a href="{{ route('members.create') }}" class="btn btn-green rounded-3">
                                     + Add New Member
@@ -83,13 +39,9 @@
 
                   </div>
 
-
-
-
                   {{-- FILTERS --}}
                   <form method="GET" action="{{ route('members.cards') }}">
 
-                        <!-- <div id="filtersContainer" class="row g-2 mb-3 d-none"> -->
                         <div id="filtersContainer" class="row g-2 mb-3">
 
                               {{-- SEARCH NAME --}}
@@ -146,21 +98,29 @@
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                               <div class="card card-hover h-100 d-flex flex-column">
 
+                                    {{-- CARD BODY --}}
                                     <div class="card-body p-3 d-flex flex-column">
 
+                                          {{-- MEMBER NAME --}}
                                           <h5 class="fw-semibold mb-2 heading-tight text-truncate-2">
                                                 {{ $member->first_name }} {{ $member->last_name }}
                                           </h5>
 
+                                          {{-- EMAIL --}}
                                           <p class="text-truncate-2"><strong>Email:</strong> {{ $member->email }}</p>
+
+                                          {{-- AGE --}}
                                           <p><strong>Age:</strong> {{ $member->age }}</p>
 
+                                          {{-- ADMIN ACTION BUTTONS --}}
                                           @if (session('role') === 'admin')
                                           <div class="action-buttons mt-auto pt-2 d-flex gap-2">
 
+                                                {{-- EDIT BUTTON --}}
                                                 <a href="{{ route('members.edit', $member->id) }}"
                                                       class="btn btn-outline-primary btn-sm w-50">Edit</a>
 
+                                                {{-- DELETE BUTTON --}}
                                                 <form action="{{ route('members.destroy', $member->id) }}"
                                                       method="POST" class="w-50">
                                                       @csrf
@@ -186,12 +146,9 @@
                         </div>
                   </div>
 
-
             </div>
       </div>
 
 </div>
-
-
 
 @endsection

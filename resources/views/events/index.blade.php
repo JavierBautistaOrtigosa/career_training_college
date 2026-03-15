@@ -22,10 +22,12 @@
                                     Filters
                               </button>
 
+                              {{-- SWITCH TO CARD VIEW --}}
                               <a href="{{ route('events.cards') }}" class="btn btn-outline-secondary rounded-3">
                                     Card View
                               </a>
 
+                              {{-- ADMIN: ADD NEW EVENT --}}
                               @if (session('role') === 'admin')
                               <a href="{{ route('events.create') }}" class="btn btn-green rounded-3">
                                     + Add New Event
@@ -35,17 +37,21 @@
                   </div>
 
 
-                  {{-- START FORM --}}
+                  {{-- START FORM (FILTERS + SORTING) --}}
                   <form method="GET" action="{{ route('events.index') }}">
 
                         {{-- FILTERS ROW (INCLUDING RESET + APPLY) --}}
                         <div id="filtersContainer" class="row g-2 mb-3">
+
+                              {{-- SEARCH TITLE --}}
                               <div class="col-md-3">
                                     <label class="form-label fw-semibold">Search Title</label>
                                     <input type="text" name="search" class="form-control"
                                           placeholder="Search event title..."
                                           value="{{ request('search') }}">
                               </div>
+
+                              {{-- CATEGORY --}}
                               <div class="col-md-3">
                                     <label class="form-label fw-semibold">Category</label>
                                     <select name="category" class="form-select">
@@ -58,12 +64,16 @@
                                           @endforeach
                                     </select>
                               </div>
+
+                              {{-- LOCATION --}}
                               <div class="col-md-3">
                                     <label class="form-label fw-semibold">Location</label>
                                     <input type="text" name="location" class="form-control"
                                           placeholder="Search location..."
                                           value="{{ request('location') }}">
                               </div>
+
+                              {{-- SORT BY --}}
                               <div class="col-md-3">
                                     <label class="form-label fw-semibold">Sort By</label>
                                     <select name="sort" class="form-select">
@@ -75,7 +85,7 @@
                                     </select>
                               </div>
 
-                              {{-- RESET + APPLY --}}
+                              {{-- RESET + APPLY BUTTONS --}}
                               <div class="col-12 text-end">
                                     <a href="{{ route('events.index') }}"
                                           class="btn btn-outline-secondary rounded-3 d-inline-flex align-items-center gap-1">
@@ -91,9 +101,11 @@
                   </form>
                   {{-- END FORM --}}
 
-                  {{-- TABLE --}}
+                  {{-- TABLE WRAPPER --}}
                   <div class="table-responsive">
                         <table class="table table-hover table-sm table-borderless">
+
+                              {{-- TABLE HEADER --}}
                               <thead class="border-bottom">
                                     <tr>
                                           <th class="pb-2">ID</th>
@@ -101,11 +113,15 @@
                                           <th class="pb-2">Date & Time</th>
                                           <th class="pb-2">Location</th>
                                           <th class="pb-2">Category</th>
+
+                                          {{-- ADMIN: ACTIONS COLUMN --}}
                                           @if (session('role') === 'admin')
                                           <th class="pb-2 text-end">Actions</th>
                                           @endif
                                     </tr>
                               </thead>
+
+                              {{-- TABLE BODY --}}
                               <tbody>
                                     @foreach($events as $event)
                                     <tr>
@@ -114,13 +130,17 @@
                                           <td>{{ \Carbon\Carbon::parse($event->date_time)->format('M j, Y – g:i A') }}</td>
                                           <td>{{ $event->location }}</td>
                                           <td>{{ $event->category }}</td>
+
+                                          {{-- ADMIN ACTION ICONS --}}
                                           @if (session('role') === 'admin')
                                           <td class="text-end">
+
                                                 {{-- EDIT ICON --}}
                                                 <a href="{{ route('events.edit', $event->id) }}"
                                                       class="action-icon icon-edit me-2">
                                                       <i class="bi bi-pencil-square"></i>
                                                 </a>
+
                                                 {{-- DELETE ICON --}}
                                                 <form action="{{ route('events.destroy', $event->id) }}"
                                                       method="POST" class="d-inline">
@@ -131,11 +151,13 @@
                                                             <i class="bi bi-trash"></i>
                                                       </button>
                                                 </form>
+
                                           </td>
                                           @endif
                                     </tr>
                                     @endforeach
                               </tbody>
+
                         </table>
                   </div>
 
@@ -145,6 +167,7 @@
                               {{ $events->links() }}
                         </div>
                   </div>
+
             </div>
       </div>
 </div>

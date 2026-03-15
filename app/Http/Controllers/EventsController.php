@@ -6,16 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use Illuminate\Support\Facades\Storage;
 
-
 class EventsController extends Controller
 {
-      // List all events
+      // Display events list with filters, sorting, and pagination
       public function index(Request $request)
       {
+            // Require login
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
+            // Base query
             $query = Event::query();
 
             // SEARCH: Title
@@ -33,7 +34,7 @@ class EventsController extends Controller
                   $query->where('location', 'like', '%' . $request->location . '%');
             }
 
-            // SORTING
+            // SORTING LOGIC
             if ($request->filled('sort')) {
                   switch ($request->sort) {
                         case 'date_asc':
@@ -53,27 +54,29 @@ class EventsController extends Controller
                               break;
                   }
             } else {
-                  // Default sorting
+                  // Default sort: oldest first
                   $query->orderBy('date_time', 'asc');
             }
 
             // PAGINATION (preserve filters)
             $events = $query->paginate(10)->appends($request->query());
 
-            // FIX: categories for filter UI
+            // Distinct categories for filter dropdown
             $categories = Event::select('category')->distinct()->pluck('category');
+
             return view('events.index', compact('events', 'categories'));
       }
 
 
-      // Show create form
+      // Show create event form
       public function create()
       {
+            // Require login
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
-            // Admin-only protection (fixed)
+            // Admin-only access
             if (session('role') !== 'admin') {
                   abort(403);
             }
@@ -82,17 +85,20 @@ class EventsController extends Controller
       }
 
 
-      // Handle create form submission
+      // Handle create event submission
       public function store(Request $request)
       {
+            // Require login
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
+            // Admin-only access
             if (session('role') !== 'admin') {
                   abort(403);
             }
 
+            // Validate form input
             $request->validate([
                   'title' => 'required',
                   'date_time' => 'required',
@@ -102,12 +108,13 @@ class EventsController extends Controller
                   'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             ]);
 
-            // IMAGE UPLOAD
+            // IMAGE UPLOAD (optional)
             $path = null;
             if ($request->hasFile('image')) {
                   $path = $request->file('image')->store('event_images', 'public');
             }
 
+            // Create event record
             Event::create([
                   'title' => $request->title,
                   'date_time' => $request->date_time,
@@ -122,36 +129,40 @@ class EventsController extends Controller
       }
 
 
-
-      // Show edit form
+      // Show edit event form
       public function edit($id)
       {
+            // Require login
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
-            // Admin-only protection (fixed)
+            // Admin-only access
             if (session('role') !== 'admin') {
                   abort(403);
             }
 
+            // Fetch event or fail
             $event = Event::findOrFail($id);
 
             return view('events.edit', compact('event'));
       }
 
 
-      // Handle update form submission
+      // Handle update event submission
       public function update(Request $request, $id)
       {
+            // Require login
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
+            // Admin-only access
             if (session('role') !== 'admin') {
                   abort(403);
             }
 
+            // Validate input
             $request->validate([
                   'title' => 'required',
                   'date_time' => 'required',
@@ -161,12 +172,13 @@ class EventsController extends Controller
                   'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             ]);
 
+            // Fetch event
             $event = Event::findOrFail($id);
 
             // IMAGE RE-UPLOAD LOGIC
             if ($request->hasFile('image')) {
 
-                  // Delete old image if it exists
+                  // Delete old image if exists
                   if ($event->image_path && Storage::disk('public')->exists($event->image_path)) {
                         Storage::disk('public')->delete($event->image_path);
                   }
@@ -178,7 +190,7 @@ class EventsController extends Controller
                   $event->image_path = $newPath;
             }
 
-            // Update all other fields
+            // Update event fields
             $event->update([
                   'title' => $request->title,
                   'date_time' => $request->date_time,
@@ -193,34 +205,38 @@ class EventsController extends Controller
       }
 
 
-
       // Delete an event
       public function destroy($id)
       {
+            // Require login
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
-            // Admin-only protection (fixed)
+            // Admin-only access
             if (session('role') !== 'admin') {
                   abort(403);
             }
 
+            // Fetch event
             $event = Event::findOrFail($id);
 
+            // Delete event record
             $event->delete();
 
             return redirect()->route('events.index');
       }
 
 
-      // Cards View
+      // Card view version of events list
       public function cards(Request $request)
       {
+            // Require login
             if (!session('isLoggedIn')) {
                   return redirect('/login');
             }
 
+            // Base query
             $query = Event::query();
 
             // SEARCH: Title
@@ -238,7 +254,7 @@ class EventsController extends Controller
                   $query->where('location', 'like', '%' . $request->location . '%');
             }
 
-            // SORTING
+            // SORTING LOGIC
             if ($request->filled('sort')) {
                   switch ($request->sort) {
                         case 'date_asc':
@@ -258,13 +274,16 @@ class EventsController extends Controller
                               break;
                   }
             } else {
+                  // Default sort
                   $query->orderBy('date_time', 'asc');
             }
 
+            // Paginate results
             $events = $query->paginate(10)->appends($request->query());
 
-            // FIX: categories for filter UI (if cards view uses them)
+            // Distinct categories for filter dropdown
             $categories = Event::select('category')->distinct()->pluck('category');
+
             return view('events.cards', compact('events', 'categories'));
       }
 }

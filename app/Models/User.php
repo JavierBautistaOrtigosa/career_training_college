@@ -9,6 +9,7 @@ class User extends Authenticatable
 {
       use HasFactory;
 
+      // Mass-assignable fields for User model
       protected $fillable = [
             'name',
             'email',

@@ -5,30 +5,31 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\MembersController;
 
-// Root → Login (which is now also the welcome page)
+// Login = Welcome Page
+
 Route::get('/', function () {
       return redirect()->route('login');
 });
 
 // Login page
+
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 
 // Login form submission
+
 Route::post('/login', [AuthController::class, 'login']);
 
 // Logout
+
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // About
+
 Route::get('/about', function () {
       return view('about');
 })->name('about');
 
-/*
-|--------------------------------------------------------------------------
-| Members CRUD Routes
-|--------------------------------------------------------------------------
-*/
+// Members CRUD
 
 Route::get('/members', [MembersController::class, 'index'])->name('members.index');
 Route::get('/members/create', [MembersController::class, 'create'])->name('members.create');
@@ -38,13 +39,10 @@ Route::put('/members/{id}', [MembersController::class, 'update'])->name('members
 Route::delete('/members/{id}', [MembersController::class, 'destroy'])->name('members.destroy');
 
 // Members - Card View
+
 Route::get('/members/cards', [MembersController::class, 'cards'])->name('members.cards');
 
-/*
-|--------------------------------------------------------------------------
-| Events CRUD Routes
-|--------------------------------------------------------------------------
-*/
+// Events CRUD
 
 Route::get('/events', [EventsController::class, 'index'])->name('events.index');
 Route::get('/events/create', [EventsController::class, 'create'])->name('events.create');
@@ -54,4 +52,5 @@ Route::put('/events/{id}', [EventsController::class, 'update'])->name('events.up
 Route::delete('/events/{id}', [EventsController::class, 'destroy'])->name('events.destroy');
 
 // Events - Card View
+
 Route::get('/events/cards', [EventsController::class, 'cards'])->name('events.cards');

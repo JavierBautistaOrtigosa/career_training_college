@@ -4,6 +4,7 @@
 
 <div class="container mt-4">
 
+      {{-- PAGE HEADER --}}
       <h1 class="page-header fw-bold heading-tight">Edit Member</h1>
 
       {{-- SUCCESS MESSAGE --}}
@@ -26,13 +27,16 @@
       </div>
       @endif
 
+      {{-- MAIN CARD WRAPPER --}}
       <div class="card-premium card-hover rounded-3 mb-4">
             <div class="card-body p-4">
 
+                  {{-- EDIT MEMBER FORM --}}
                   <form action="{{ route('members.update', $member->id) }}" method="POST">
                         @csrf
                         @method('PUT')
 
+                        {{-- MEMBER ID (READ-ONLY) --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Member ID</label>
                               <input
@@ -42,6 +46,7 @@
                                     readonly>
                         </div>
 
+                        {{-- FIRST NAME --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">First Name</label>
                               <input
@@ -52,6 +57,7 @@
                                     required>
                         </div>
 
+                        {{-- LAST NAME --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Last Name</label>
                               <input
@@ -62,6 +68,7 @@
                                     required>
                         </div>
 
+                        {{-- AGE --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Age</label>
                               <input
@@ -72,6 +79,7 @@
                                     required>
                         </div>
 
+                        {{-- EMAIL --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Email</label>
                               <input
@@ -82,6 +90,7 @@
                                     required>
                         </div>
 
+                        {{-- PHONE --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Phone</label>
                               <input
@@ -92,6 +101,7 @@
                                     required>
                         </div>
 
+                        {{-- ADDRESS --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Address</label>
                               <input
@@ -102,6 +112,7 @@
                                     required>
                         </div>
 
+                        {{-- PROFESSIONAL SUMMARY --}}
                         <div class="mb-3">
                               <label class="form-label fw-semibold">Professional Summary</label>
                               <textarea
@@ -110,6 +121,7 @@
                                     rows="3">{{ $member->professional_summary }}</textarea>
                         </div>
 
+                        {{-- ACTION BUTTONS --}}
                         <div class="action-buttons justify-content-end gap-2 mt-4">
                               <a href="{{ route('members.index') }}" class="btn btn-outline-secondary">
                                     Cancel
